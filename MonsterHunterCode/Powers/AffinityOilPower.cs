@@ -43,6 +43,14 @@ public class AffinityOilPower() : MonsterHunterPower
             }
             await PowerCmd.Remove<StaminaOilPower>(target);
         }
+        else if (target.HasPower<MindsEyeOilPower>())
+        {
+            await PowerCmd.Remove<MindsEyeOilPower>(target);
+        }
+        else if (target.HasPower<DestroyerOilPower>())
+        {
+            await PowerCmd.Remove<DestroyerOilPower>(target);
+        }
     }
     
     public override async Task AfterDamageGiven(

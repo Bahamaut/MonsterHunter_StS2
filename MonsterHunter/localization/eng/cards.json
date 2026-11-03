@@ -54,5 +54,11 @@
   "MONSTERHUNTER-LEAPING_SLASH.description": "Deal {Damage:diff()} damage. Gain {VigorPower:diff()} [gold]Vigor[/gold].\n[gold]Combo[/gold]",
   "MONSTERHUNTER-LEAPING_SLASH.title": "Leaping Slash",
   "MONSTERHUNTER-COMBO_MASTER.description": "At the Start of your turn, add a random [gold]combo[/gold] card from your draw pile into your hand.",
-  "MONSTERHUNTER-COMBO_MASTER.title": "Combo Master"
+  "MONSTERHUNTER-COMBO_MASTER.title": "Combo Master",
+  "MONSTERHUNTER-MINDS_EYE_OIL.description": "Apply 1 Vulnerable the first time you attack per turn.",
+  "MONSTERHUNTER-MINDS_EYE_OIL.title": "Mind's Eye Oil",
+  "MONSTERHUNTER-DESTROYER_OIL.description": "Apply 1 Weak the first time you attack per turn.",
+  "MONSTERHUNTER-DESTROYER_OIL.title": "Destroyer Oil",
+  "MONSTERHUNTER-WEAPON_OIL.description": "Select an oil to apply to your weapon. will overwrite previous oils",
+  "MONSTERHUNTER-WEAPON_OIL.title": "Weapon Oil"
 }

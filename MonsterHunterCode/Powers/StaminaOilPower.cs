@@ -44,6 +44,14 @@ public class StaminaOilPower() : MonsterHunterPower
 
             await PowerCmd.Remove<AffinityOilPower>(target);
         }
+        else if (target.HasPower<MindsEyeOilPower>())
+        {
+            await PowerCmd.Remove<MindsEyeOilPower>(target);
+        }
+        else if (target.HasPower<DestroyerOilPower>())
+        {
+            await PowerCmd.Remove<DestroyerOilPower>(target);
+        }
     }
 
     public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props,

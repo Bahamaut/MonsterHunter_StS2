@@ -7,14 +7,14 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MonsterHunter.MonsterHunterCode.Cards.Basic;
 using MonsterHunter.MonsterHunterCode.Powers;
-using MonsterHunter.MonsterHunterCode.Relics;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Oil;
 
 [Pool(typeof(TokenCardPool))]
 public class StaminaOil() : MonsterHunterCard(-1,
-    CardType.None, CardRarity.None, TargetType.Self), WeaponOilRelic.IChoosable
+    CardType.None, CardRarity.None, TargetType.Self), WeaponOil.IChoosable
 {
     public override int MaxUpgradeLevel => 0;
 
