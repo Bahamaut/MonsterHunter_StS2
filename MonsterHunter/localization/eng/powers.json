@@ -1,0 +1,29 @@
+{
+  "MONSTERHUNTER-AFFINITY_OIL_POWER.description": "Gain up to 2 Temporary Strength when attacking",
+  "MONSTERHUNTER-AFFINITY_OIL_POWER.smartDescription": "Affinity Oil Smart Description",
+  "MONSTERHUNTER-AFFINITY_OIL_POWER.title": "Affinity Oil",
+
+  "MONSTERHUNTER-STAMINA_OIL_POWER.description": "Gain up to 2 Temporary Dexterity when blocking",
+  "MONSTERHUNTER-STAMINA_OIL_POWER.smartDescription": "Stamina Oil Smart Description",
+  "MONSTERHUNTER-STAMINA_OIL_POWER.title": "Stamina Oil",
+
+  "MONSTERHUNTER-DEFENSIVE_FLOURISH_POWER.description": "",
+  "MONSTERHUNTER-DEFENSIVE_FLOURISH_POWER.smartDescription": "",
+  "MONSTERHUNTER-DEFENSIVE_FLOURISH_POWER.title": "Defensive Flourish Power",
+
+  "MONSTERHUNTER-ENERGETIC_FLOURISH_POWER.description": "",
+  "MONSTERHUNTER-ENERGETIC_FLOURISH_POWER.smartDescription": "",
+  "MONSTERHUNTER-ENERGETIC_FLOURISH_POWER.title": "Energetic Flourish Power",
+
+  "MONSTERHUNTER-COUNTER_SLASH_POWER.description": "",
+  "MONSTERHUNTER-COUNTER_SLASH_POWER.smartDescription": "",
+  "MONSTERHUNTER-COUNTER_SLASH_POWER.title": "Counter Slash Power",
+
+  "MONSTERHUNTER-PERFECT_GUARD_POWER.description": "",
+  "MONSTERHUNTER-PERFECT_GUARD_POWER.smartDescription": "",
+  "MONSTERHUNTER-PERFECT_GUARD_POWER.title": "Perfect Guard Power",
+
+  "MONSTERHUNTER-COMBO_MASTER_POWER.description": "",
+  "MONSTERHUNTER-COMBO_MASTER_POWER.smartDescription": "",
+  "MONSTERHUNTER-COMBO_MASTER_POWER.title": "Combo Master Power"
+}

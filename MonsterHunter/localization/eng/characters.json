@@ -1,0 +1,16 @@
+{
+  "MONSTERHUNTER-MONSTER_HUNTER.aromaPrinciple": "Lore",
+  "MONSTERHUNTER-MONSTER_HUNTER.banter.alive.endTurnPing": "Co-op hurry up end turn ping message",
+  "MONSTERHUNTER-MONSTER_HUNTER.banter.dead.endTurnPing": "...",
+  "MONSTERHUNTER-MONSTER_HUNTER.cardsModifierDescription": "__ cards will now appear in rewards and shops.",
+  "MONSTERHUNTER-MONSTER_HUNTER.cardsModifierTitle": "__ Cards",
+  "MONSTERHUNTER-MONSTER_HUNTER.description": "Character Selection\nScreen Description",
+  "MONSTERHUNTER-MONSTER_HUNTER.eventDeathPrevention": "Co-op survival line",
+  "MONSTERHUNTER-MONSTER_HUNTER.goldMonologue": "Line spoken when obtaining a large amount of gold",
+  "MONSTERHUNTER-MONSTER_HUNTER.possessiveAdjective": "his/her/its",
+  "MONSTERHUNTER-MONSTER_HUNTER.pronounObject": "him/her/it",
+  "MONSTERHUNTER-MONSTER_HUNTER.pronounPossessive": "his/hers/its",
+  "MONSTERHUNTER-MONSTER_HUNTER.pronounSubject": "he/she/it",
+  "MONSTERHUNTER-MONSTER_HUNTER.title": "The MonsterHunter",
+  "MONSTERHUNTER-MONSTER_HUNTER.titleObject": "The MonsterHunter"
+}
