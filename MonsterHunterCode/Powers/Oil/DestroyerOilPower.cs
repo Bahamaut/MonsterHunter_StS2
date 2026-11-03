@@ -6,12 +6,10 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using MonsterHunter.MonsterHunterCode.Powers;
 
-namespace MonsterHunter.MonsterHunterCode.Powers;
+namespace MonsterHunter.MonsterHunterCode.Powers.Oil;
 
-
-public class MindsEyeOilPower() : MonsterHunterPower
+public class DestroyerOilPower() : MonsterHunterPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -19,9 +17,9 @@ public class MindsEyeOilPower() : MonsterHunterPower
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public override int DisplayAmount => Math.Max(0, this.Amount - this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed);
+    public override int DisplayAmount => Math.Max(0, this.Amount - this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed);
     
-    protected override object InitInternalData() => (object) new MindsEyeOilPower.Data();
+    protected override object InitInternalData() => (object) new DestroyerOilPower.Data();
     
     public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
     {
@@ -65,10 +63,10 @@ public class MindsEyeOilPower() : MonsterHunterPower
         CardModel? cardSource)
     {
         if (dealer == null || dealer != this.Owner && dealer.PetOwner?.Creature != this.Owner ||
-            !props.IsPoweredAttack() || result.TotalDamage <= 0 || this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed >= this.Amount)
+            !props.IsPoweredAttack() || result.TotalDamage <= 0 || this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed >= this.Amount)
             return;
         
-        VulnerablePower vulnerablePower = await PowerCmd.Apply<VulnerablePower>(choiceContext, target, this.DynamicVars.Weak.BaseValue, dealer, (CardModel) cardSource);
+        WeakPower weakPower = await PowerCmd.Apply<WeakPower>(choiceContext, target, this.DynamicVars.Weak.BaseValue, dealer, (CardModel) cardSource);
         SetAttacksPlayed(1);
     }
     
@@ -86,7 +84,7 @@ public class MindsEyeOilPower() : MonsterHunterPower
     
     public void SetAttacksPlayed(int value)
     {
-        this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed = value;
+        this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed = value;
         this.InvokeDisplayAmountChanged();
     }
 
@@ -94,4 +92,6 @@ public class MindsEyeOilPower() : MonsterHunterPower
     {
         public int attacksPlayed;
     }
+
+    
 }

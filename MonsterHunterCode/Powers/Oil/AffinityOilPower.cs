@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using BaseLib.Extensions;
+﻿using System.Collections.ObjectModel;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -12,10 +7,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using MonsterHunter.MonsterHunterCode.Cards;
-using MonsterHunter.MonsterHunterCode.Powers;
 
-namespace MonsterHunter.MonsterHunterCode.Powers;
+namespace MonsterHunter.MonsterHunterCode.Powers.Oil;
 
 public class AffinityOilPower() : MonsterHunterPower
 {

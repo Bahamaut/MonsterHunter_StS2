@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Cards.Basic;
 using MonsterHunter.MonsterHunterCode.Powers;
+using MonsterHunter.MonsterHunterCode.Powers.Oil;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Oil;
 

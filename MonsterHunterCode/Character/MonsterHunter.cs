@@ -40,7 +40,7 @@ public class MonsterHunter : PlaceholderCharacterModel
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [
-        ModelDb.Relic<WeaponOilRelic>()
+        ModelDb.Relic<LowRankQuestBoard>()
     ];
 
     public override CardPoolModel CardPool => ModelDb.CardPool<MonsterHunterCardPool>();
