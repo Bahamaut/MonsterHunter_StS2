@@ -59,6 +59,12 @@
   "MONSTERHUNTER-MINDS_EYE_OIL.title": "Mind's Eye Oil",
   "MONSTERHUNTER-DESTROYER_OIL.description": "Apply 1 Weak the first time you attack per turn.",
   "MONSTERHUNTER-DESTROYER_OIL.title": "Destroyer Oil",
-  "MONSTERHUNTER-WEAPON_OIL.description": "Select an oil to apply to your weapon. will overwrite previous oils",
-  "MONSTERHUNTER-WEAPON_OIL.title": "Weapon Oil"
+  "MONSTERHUNTER-WEAPON_OIL.description": "Select an oil to apply to your weapon. Will overwrite previous oils.",
+  "MONSTERHUNTER-WEAPON_OIL.title": "Weapon Oil",
+  "MONSTERHUNTER-LOW_RANK_CAPTURE_QUEST.description": "Take no damage and get a random upgraded card reward.",
+  "MONSTERHUNTER-LOW_RANK_CAPTURE_QUEST.title": "Low Rank Capture Quest",
+  "MONSTERHUNTER-LOW_RANK_SLAY_QUEST.description": "Finish combat to earn 10 gold. Get a fatal hit to earn an extra 10 gold.",
+  "MONSTERHUNTER-LOW_RANK_SLAY_QUEST.title": "Low Rank Slay Quest",
+  "MONSTERHUNTER-LOW_RANK_GATHERING_QUEST.description": "Finish combat to earn a random common or uncommon potion.",
+  "MONSTERHUNTER-LOW_RANK_GATHERING_QUEST.title": "Low Rank Gathering Quest"
 }

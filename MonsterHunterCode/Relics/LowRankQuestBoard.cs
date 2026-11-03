@@ -14,29 +14,33 @@ using MegaCrit.Sts2.Core.Models;
 using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Cards.Basic;
 using MonsterHunter.MonsterHunterCode.Cards.Oil;
+using MonsterHunter.MonsterHunterCode.Cards.Quest;
 
 namespace MonsterHunter.MonsterHunterCode.Relics;
 
-public class WeaponOilRelic() : MonsterHunterRelic
+
+public class LowRankQuestBoard() : MonsterHunterRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(2)
+        new CardsVar(3)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<AffinityOil>(),
-        HoverTipFactory.FromCard<StaminaOil>()
+        HoverTipFactory.FromCard<LowRankCaptureQuest>(),
+        HoverTipFactory.FromCard<LowRankSlayQuest>(),
+        HoverTipFactory.FromCard<LowRankGatheringQuest>()
     ];
 
-    public static readonly IReadOnlyList<IChoosable> _weaponOils =
+    public static readonly IReadOnlyList<IChoosable> quests =
         new ReadOnlyCollection<IChoosable>(
         [
-            ModelDb.Card<AffinityOil>(),
-            ModelDb.Card<StaminaOil>()
+            ModelDb.Card<LowRankCaptureQuest>(),
+            ModelDb.Card<LowRankSlayQuest>(),
+            ModelDb.Card<LowRankGatheringQuest>(),
         ]);
 
     public override async Task BeforeHandDraw(
@@ -44,12 +48,12 @@ public class WeaponOilRelic() : MonsterHunterRelic
         PlayerChoiceContext choiceContext,
         ICombatState combatState)
     {
-        if (player != this.Owner || this.Owner.PlayerCombatState.TurnNumber % 2 == 0)
+        if (player != this.Owner || this.Owner.PlayerCombatState.TurnNumber !=1)
             return;
         this.Flash();
 
         CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
-            (IReadOnlyList<CardModel>)_weaponOils.Select<IChoosable, CardModel>((Func<IChoosable, CardModel>)(
+            (IReadOnlyList<CardModel>)quests.Select<IChoosable, CardModel>((Func<IChoosable, CardModel>)(
                 c =>
                 {
                     CardModel card = combatState.CreateCard((CardModel)c, player);

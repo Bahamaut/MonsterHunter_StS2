@@ -35,7 +35,7 @@ public class MonsterHunter : PlaceholderCharacterModel
         ModelDb.Card<DefendMonsterHunter>(),
         ModelDb.Card<DefendMonsterHunter>(),
         ModelDb.Card<DefendMonsterHunter>(),
-        ModelDb.Card<EnergeticFlourish>()
+        ModelDb.Card<WeaponOil>()
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
