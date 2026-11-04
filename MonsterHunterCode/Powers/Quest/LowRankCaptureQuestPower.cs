@@ -11,9 +11,9 @@ using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using MonsterHunter.MonsterHunterCode.Powers;
+using MonsterHunter.MonsterHunterCode.Relics;
 
 namespace MonsterHunter.MonsterHunterCode.Powers.Quest;
-
 
 public class LowRankCaptureQuestPower() : MonsterHunterPower
 {
@@ -74,5 +74,15 @@ public class LowRankCaptureQuestPower() : MonsterHunterPower
             }
         }
         return true;
+    }
+    
+    public override Task AfterCombatEnd(CombatRoom room)
+    {
+        if(TookDamageThisCombat)
+            return Task.CompletedTask;
+
+        if (Owner.Player._relics.Any(r => r is LowRankQuestBoard))
+           Owner.Player._relics.OfType<LowRankQuestBoard>().FirstOrDefault().CaptureQuestComplete = true;
+        return Task.CompletedTask;
     }
 }

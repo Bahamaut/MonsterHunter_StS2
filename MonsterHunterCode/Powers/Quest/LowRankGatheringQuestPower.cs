@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
@@ -20,10 +21,10 @@ public class LowRankGatheringQuestPower() : MonsterHunterPower
 
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        var potion = PotionFactory.CreateRandomPotionsOutOfCombat(this.Owner.Player, 1,
-                this.Owner.Player.RunState.Rng.CombatPotionGeneration,
-                PotionFactory.GetPotionOptions(this.Owner.Player).Where(p => p.Rarity != PotionRarity.Common))
-            .FirstOrDefault();
+        var potion = PotionFactory.CreateRandomPotionOutOfCombat(this.Owner.Player,
+                this.Owner.Player.PlayerRng.Rewards, Owner.Player.Potions.Where(p => p.Rarity != PotionRarity.Common))
+            .ToMutable();
+
         if (potion == null)
             return Task.CompletedTask;
 
