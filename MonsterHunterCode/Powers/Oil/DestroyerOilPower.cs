@@ -66,7 +66,7 @@ public class DestroyerOilPower() : MonsterHunterPower
             !props.IsPoweredAttack() || result.TotalDamage <= 0 || this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed >= this.Amount)
             return;
         
-        WeakPower weakPower = await PowerCmd.Apply<WeakPower>(choiceContext, target, this.DynamicVars.Weak.BaseValue, dealer, (CardModel) cardSource);
+        WeakPower weakPower = await PowerCmd.Apply<WeakPower>(choiceContext, target, this.Amount, dealer, (CardModel) cardSource);
         SetAttacksPlayed(1);
     }
     

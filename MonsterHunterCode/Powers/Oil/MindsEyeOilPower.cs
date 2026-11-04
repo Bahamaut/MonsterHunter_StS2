@@ -67,7 +67,7 @@ public class MindsEyeOilPower() : MonsterHunterPower
             !props.IsPoweredAttack() || result.TotalDamage <= 0 || this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed >= this.Amount)
             return;
         
-        VulnerablePower vulnerablePower = await PowerCmd.Apply<VulnerablePower>(choiceContext, target, this.DynamicVars.Weak.BaseValue, dealer, (CardModel) cardSource);
+        VulnerablePower vulnerablePower = await PowerCmd.Apply<VulnerablePower>(choiceContext, target, this.Amount, dealer, (CardModel) cardSource);
         SetAttacksPlayed(1);
     }
     
