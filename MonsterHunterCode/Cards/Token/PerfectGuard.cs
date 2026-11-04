@@ -35,7 +35,7 @@ public class PerfectGuard() : MonsterHunterCard(2,
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<CounterSlash>()
+        HoverTipFactory.FromCard<CounterSlash>(IsUpgraded)
     ];
     
     public override async Task BeforeCardPlayed(CardPlay cardPlay)

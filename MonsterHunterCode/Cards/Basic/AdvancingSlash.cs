@@ -25,7 +25,7 @@ public class AdvancingSlash() : MonsterHunterCard(1,
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
-        HoverTipFactory.FromCard<Roundslash>()
+        HoverTipFactory.FromCard<Roundslash>(IsUpgraded)
     ];
 
     protected override async Task OnPlay(

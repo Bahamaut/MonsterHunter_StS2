@@ -24,8 +24,8 @@ public class ChargingSlash() : MonsterHunterCard(1,
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<ScalingSlash>(),
-        HoverTipFactory.FromCard<PlungingThrust>()
+        HoverTipFactory.FromCard<ScalingSlash>(IsUpgraded),
+        HoverTipFactory.FromCard<PlungingThrust>(IsUpgraded)
     ];
 
     protected override async Task OnPlay(

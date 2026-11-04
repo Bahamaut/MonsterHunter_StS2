@@ -34,7 +34,7 @@ public class LeapingSlash() : MonsterHunterCard(1,
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<PerfectRush>()
+        HoverTipFactory.FromCard<PerfectRush>(IsUpgraded)
     ];
     
     public override async Task BeforeCardPlayed(CardPlay cardPlay)

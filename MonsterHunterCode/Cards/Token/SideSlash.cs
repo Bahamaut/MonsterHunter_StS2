@@ -32,7 +32,7 @@ public class SideSlash() : MonsterHunterCard(1,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<DiagonalRisingSlash>(),
+        HoverTipFactory.FromCard<DiagonalRisingSlash>(IsUpgraded),
         HoverTipFactory.FromPower<WeakPower>()
     ];
 

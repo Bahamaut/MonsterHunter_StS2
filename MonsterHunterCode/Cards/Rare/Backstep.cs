@@ -37,8 +37,8 @@ public class Backstep() : MonsterHunterCard(0,
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<LeapingSlash>(),
-        HoverTipFactory.FromCard<PerfectRush>()
+        HoverTipFactory.FromCard<LeapingSlash>(IsUpgraded),
+        HoverTipFactory.FromCard<PerfectRush>(IsUpgraded)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

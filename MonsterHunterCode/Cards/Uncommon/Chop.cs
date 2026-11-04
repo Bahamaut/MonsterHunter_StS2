@@ -28,8 +28,8 @@ public class Chop() : MonsterHunterCard(1,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<SideSlash>(),
-        HoverTipFactory.FromCard<DiagonalRisingSlash>(),
+        HoverTipFactory.FromCard<SideSlash>(IsUpgraded),
+        HoverTipFactory.FromCard<DiagonalRisingSlash>(IsUpgraded),
         HoverTipFactory.FromPower<VulnerablePower>()
     ];
 

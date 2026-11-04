@@ -28,7 +28,7 @@ public class ShieldBash() : MonsterHunterCard(1,
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<HardBash>()
+        HoverTipFactory.FromCard<HardBash>(IsUpgraded)
     ];
 
     protected override async Task OnPlay(

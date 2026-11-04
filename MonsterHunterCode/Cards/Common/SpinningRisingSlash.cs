@@ -26,7 +26,7 @@ public class SpinningRisingSlash() : MonsterHunterCard(1,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<SpinningReaper>()
+        HoverTipFactory.FromCard<SpinningReaper>(IsUpgraded)
     ];
 
     protected override async Task OnPlay(

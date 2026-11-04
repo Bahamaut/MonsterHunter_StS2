@@ -29,7 +29,7 @@ public class ScalingSlash() : MonsterHunterCard(1,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromCard<PlungingThrust>(),
+        HoverTipFactory.FromCard<PlungingThrust>(IsUpgraded),
         HoverTipFactory.FromPower<VulnerablePower>()
     ];
     
