@@ -34,6 +34,9 @@ public class Roundslash() : MonsterHunterCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        if(play.Player != this.Owner || play.Card != this)
+            await CardCmd.Exhaust(choiceContext, this);
+        
         AttackCommand attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard( this, play).TargetingAllOpponents(this.CombatState).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
 
