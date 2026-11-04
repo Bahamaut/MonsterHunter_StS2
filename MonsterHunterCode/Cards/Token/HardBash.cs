@@ -30,6 +30,12 @@ public class HardBash() : MonsterHunterCard(2,
         new StringVar("Finisher")
     ];
     
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (cardPlay.Player == this.Owner && cardPlay.Card != this && this.Pile.Type == PileType.Hand)
+            await CardCmd.Exhaust(new ThrowingPlayerChoiceContext(), this);
+    }
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
         CardKeyword.Ethereal,
         CardKeyword.Exhaust

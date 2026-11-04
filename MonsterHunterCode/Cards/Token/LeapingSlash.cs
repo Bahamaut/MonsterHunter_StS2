@@ -36,6 +36,12 @@ public class LeapingSlash() : MonsterHunterCard(1,
     [
         HoverTipFactory.FromCard<PerfectRush>()
     ];
+    
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (cardPlay.Player == this.Owner && cardPlay.Card != this && this.Pile.Type == PileType.Hand)
+            await CardCmd.Exhaust(new ThrowingPlayerChoiceContext(), this);
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

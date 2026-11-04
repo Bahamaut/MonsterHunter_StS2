@@ -37,6 +37,12 @@ public class PerfectGuard() : MonsterHunterCard(2,
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromCard<CounterSlash>()
     ];
+    
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (cardPlay.Player == this.Owner && cardPlay.Card != this && this.Pile.Type == PileType.Hand)
+            await CardCmd.Exhaust(new ThrowingPlayerChoiceContext(), this);
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
