@@ -1,12 +1,15 @@
 ﻿using System.Collections.ObjectModel;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Cards.Oil;
+using MonsterHunter.MonsterHunterCode.Commands;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Basic;
 
@@ -16,16 +19,17 @@ public class WeaponOil() : MonsterHunterCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(4)
+        new CardsVar(3)
     ];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
         HoverTipFactory.FromCard<AffinityOil>(),
         HoverTipFactory.FromCard<StaminaOil>(),
         HoverTipFactory.FromCard<DestroyerOil>(),
         HoverTipFactory.FromCard<MindsEyeOil>()
     ];
-    
+
     public static readonly IReadOnlyList<IChoosable> _weaponOils =
         new ReadOnlyCollection<IChoosable>(
         [
@@ -39,16 +43,16 @@ public class WeaponOil() : MonsterHunterCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
-            (IReadOnlyList<CardModel>)_weaponOils.Select<IChoosable, CardModel>((Func<IChoosable, CardModel>)(
+        var card = await MonsterHunterCardSelectCmd.FromChooseACardScreen(choiceContext,
+            _weaponOils.Select((
                 c =>
                 {
-                    CardModel card = CombatState.CreateCard((CardModel)c, this.Owner);
+                    CardModel card = CombatState.CreateCard((CardModel)c, play.Player);
                     return card;
-                })).ToList(), this.Owner);
-        if (cardModel == null)
+                })).ToList(), play.Player);
+        if (card == null)
             return;
-        await ((IChoosable)cardModel).OnChosen(choiceContext);
+        await ((IChoosable)card).OnChosen(choiceContext);
     }
 
     public interface IChoosable
