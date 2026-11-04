@@ -66,5 +66,7 @@
   "MONSTERHUNTER-LOW_RANK_SLAY_QUEST.description": "Finish combat to earn 10 gold. Get a fatal hit to earn an extra 10 gold.",
   "MONSTERHUNTER-LOW_RANK_SLAY_QUEST.title": "Low Rank Slay Quest",
   "MONSTERHUNTER-LOW_RANK_GATHERING_QUEST.description": "Finish combat to earn a random common or uncommon potion.",
-  "MONSTERHUNTER-LOW_RANK_GATHERING_QUEST.title": "Low Rank Gathering Quest"
+  "MONSTERHUNTER-LOW_RANK_GATHERING_QUEST.title": "Low Rank Gathering Quest",
+  "MONSTERHUNTER-COMBO_BREAKER.description": "Gain {Block:diff()}  block. Gain an addtional {Block:diff()} block if you break a combo",
+  "MONSTERHUNTER-COMBO_BREAKER.title": "Combo Breaker"
 }
