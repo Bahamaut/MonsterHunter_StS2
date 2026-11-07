@@ -114,5 +114,7 @@
   "MONSTERHUNTER-WEAPON_OIL.description": "Select an oil to apply to your weapon. Will overwrite previous oils.",
   "MONSTERHUNTER-WEAPON_OIL.title": "Weapon Oil",
   "MONSTERHUNTER-WIDE_RANGE.description": "EVERYONE gets a Health Potion.",
-  "MONSTERHUNTER-WIDE_RANGE.title": "Wide Range"
+  "MONSTERHUNTER-WIDE_RANGE.title": "Wide Range",
+  "MONSTERHUNTER-BARREL_BOMB_BOWLING.description": "Apply {BlastPower:diff()} [gold]Blast[/gold] to a random enemy {Repeat:diff()} times.",
+  "MONSTERHUNTER-BARREL_BOMB_BOWLING.title": "Barrel Bomb Bowling"
 }
