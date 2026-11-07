@@ -21,14 +21,20 @@ public class LowRankGatheringQuestPower() : MonsterHunterPower
 
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        var potion = PotionFactory.CreateRandomPotionOutOfCombat(this.Owner.Player,
-                this.Owner.Player.PlayerRng.Rewards, Owner.Player.Potions.Where(p => p.Rarity != PotionRarity.Common))
-            .ToMutable();
-
-        if (potion == null)
+        if (Owner.Player == null)
             return Task.CompletedTask;
 
-        room.AddExtraReward(this.Owner.Player, (Reward)new PotionReward(potion, this.Owner.Player));
+        PotionModel? potion = null;
+
+        while (potion is null)
+        {
+            potion = PotionFactory.CreateRandomPotionOutOfCombat(this.Owner.Player,
+                this.Owner.Player.PlayerRng.Rewards,
+                PotionFactory.GetPotionOptions(Owner.Player).Where(p =>
+                    p.Rarity != PotionRarity.Common && p.Rarity != PotionRarity.Uncommon));
+        }
+
+        room.AddExtraReward(this.Owner.Player, (Reward)new PotionReward(potion.ToMutable(), this.Owner.Player));
         return Task.CompletedTask;
     }
 }
