@@ -53,5 +53,13 @@
 
   "MONSTERHUNTER-COVERED_POWER.description": "",
   "MONSTERHUNTER-COVERED_POWER.smartDescription": "",
-  "MONSTERHUNTER-COVERED_POWER.title": "Covered"
+  "MONSTERHUNTER-COVERED_POWER.title": "Covered",
+
+  "MONSTERHUNTER-BLAST_BLIGHT_POWER.description": "",
+  "MONSTERHUNTER-BLAST_BLIGHT_POWER.smartDescription": "",
+  "MONSTERHUNTER-BLAST_BLIGHT_POWER.title": "Blast Blight Power",
+
+  "MONSTERHUNTER-BLAST_POWER.description": "",
+  "MONSTERHUNTER-BLAST_POWER.smartDescription": "",
+  "MONSTERHUNTER-BLAST_POWER.title": "BlastPower"
 }
