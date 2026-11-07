@@ -1,10 +1,10 @@
 {
   "MONSTERHUNTER-AFFINITY_OIL_POWER.description": "Gain up to 2 Temporary Strength when attacking",
-  "MONSTERHUNTER-AFFINITY_OIL_POWER.smartDescription": "Affinity Oil Smart Description",
+  "MONSTERHUNTER-AFFINITY_OIL_POWER.smartDescription": "Gain up to 2 Temporary Strength when attacking",
   "MONSTERHUNTER-AFFINITY_OIL_POWER.title": "Affinity Oil",
 
-  "MONSTERHUNTER-STAMINA_OIL_POWER.description": "Gain up to 2 Temporary Dexterity when blocking",
-  "MONSTERHUNTER-STAMINA_OIL_POWER.smartDescription": "Stamina Oil Smart Description",
+  "MONSTERHUNTER-STAMINA_OIL_POWER.description": "Gain up to 2 Temporary Dexterity when gaining block from cards",
+  "MONSTERHUNTER-STAMINA_OIL_POWER.smartDescription": "Gain up to 2 Temporary Dexterity when gaining block from cards",
   "MONSTERHUNTER-STAMINA_OIL_POWER.title": "Stamina Oil",
 
   "MONSTERHUNTER-DEFENSIVE_FLOURISH_POWER.description": "",
@@ -61,5 +61,29 @@
 
   "MONSTERHUNTER-BLAST_POWER.description": "",
   "MONSTERHUNTER-BLAST_POWER.smartDescription": "",
-  "MONSTERHUNTER-BLAST_POWER.title": "BlastPower"
+  "MONSTERHUNTER-BLAST_POWER.title": "Blast Power",
+
+  "MONSTERHUNTER-HUNTER_FORM_POWER.description": "",
+  "MONSTERHUNTER-HUNTER_FORM_POWER.smartDescription": "",
+  "MONSTERHUNTER-HUNTER_FORM_POWER.title": "Hunter Form",
+
+  "MONSTERHUNTER-BLAST_FUMES_POWER.description": "",
+  "MONSTERHUNTER-BLAST_FUMES_POWER.smartDescription": "",
+  "MONSTERHUNTER-BLAST_FUMES_POWER.title": "Blast Fumes Power",
+
+  "MONSTERHUNTER-BLAST_WEAPON_POWER.description": "",
+  "MONSTERHUNTER-BLAST_WEAPON_POWER.smartDescription": "",
+  "MONSTERHUNTER-BLAST_WEAPON_POWER.title": "Blast Weapon Power",
+
+  "MONSTERHUNTER-FELYNE_INSURANCE_POWER.description": "",
+  "MONSTERHUNTER-FELYNE_INSURANCE_POWER.smartDescription": "",
+  "MONSTERHUNTER-FELYNE_INSURANCE_POWER.title": "Felyne Insurance Power",
+
+  "MONSTERHUNTER-BLAST_BUILDUP_POWER.description": "",
+  "MONSTERHUNTER-BLAST_BUILDUP_POWER.smartDescription": "",
+  "MONSTERHUNTER-BLAST_BUILDUP_POWER.title": "Blast Buildup Power",
+
+  "MONSTERHUNTER-COUNTER_BLAST_POWER.description": "",
+  "MONSTERHUNTER-COUNTER_BLAST_POWER.smartDescription": "",
+  "MONSTERHUNTER-COUNTER_BLAST_POWER.title": "Counter Blast Power"
 }

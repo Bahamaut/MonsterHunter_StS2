@@ -29,7 +29,7 @@ public class BlastStrike() : MonsterHunterCard(1,
     {
         ArgumentNullException.ThrowIfNull((object) cardPlay.Target, "cardPlay.Target");
         AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard((CardModel) this, cardPlay).Targeting(cardPlay.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
-        await MonsterHunterBlastHelper.HandleBlast(choiceContext, cardPlay, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
+        await MonsterHunterBlastHelper.HandleBlast(choiceContext, cardPlay.Target, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
     }
 
     protected override void OnUpgrade()
