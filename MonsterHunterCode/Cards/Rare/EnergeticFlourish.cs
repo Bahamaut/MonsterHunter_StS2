@@ -29,7 +29,6 @@ public class EnergeticFlourish() : MonsterHunterCard(2,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Energy.UpgradeValueBy(1M);
         this.DynamicVars.Cards.UpgradeValueBy(1M);
     }
 }

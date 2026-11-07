@@ -18,7 +18,7 @@ public class DefensiveFlourish() : MonsterHunterCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(3M, ValueProp.Unpowered)
+        new BlockVar(2M, ValueProp.Unpowered)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [

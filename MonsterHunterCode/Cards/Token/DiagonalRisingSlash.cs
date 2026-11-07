@@ -49,8 +49,6 @@ public class DiagonalRisingSlash() : MonsterHunterCard(0,
         CardPlay cardPlay)
     {
         int attackAmount = this.ResolveEnergyXValue() + 1;
-        if (this.IsUpgraded)
-            ++attackAmount;
         AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue)
             .WithHitCount(attackAmount).FromCard((CardModel)this, cardPlay).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_giant_horizontal_slash").Execute(choiceContext);
@@ -66,5 +64,10 @@ public class DiagonalRisingSlash() : MonsterHunterCard(0,
             return;
         
         await CardCmd.Exhaust(choiceContext, this);
+    }
+    
+    protected override void OnUpgrade()
+    {
+        this.DynamicVars.Damage.UpgradeValueBy(2M);
     }
 }

@@ -13,7 +13,7 @@ using MonsterHunter.MonsterHunterCode.Commands;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Basic;
 
-public class WeaponOil() : MonsterHunterCard(1,
+public class WeaponOil() : MonsterHunterCard(0,
     CardType.Skill, CardRarity.Basic,
     TargetType.Self)
 {
@@ -60,5 +60,5 @@ public class WeaponOil() : MonsterHunterCard(1,
         Task OnChosen(PlayerChoiceContext choiceContext);
     }
 
-    protected override void OnUpgrade() => this.EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() => this.AddKeyword(CardKeyword.Innate);
 }
