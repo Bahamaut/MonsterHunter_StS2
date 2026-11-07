@@ -19,6 +19,9 @@ public class FelyneInsurancePower() : MonsterHunterPower
 
     public override bool ShouldDie(Creature creature)
     {
+        if (creature.IsEnemy)
+            return true;
+        
         _preventedDeath = true;
         return false;
     }
