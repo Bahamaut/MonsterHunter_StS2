@@ -17,7 +17,7 @@
   "MONSTERHUNTER-COUNTER_SLASH.title": "Counter Slash",
   "MONSTERHUNTER-DEFEND_MONSTER_HUNTER.description": "Gain {Block:diff()} [gold]Block[/gold].",
   "MONSTERHUNTER-DEFEND_MONSTER_HUNTER.title": "Defend",
-  "MONSTERHUNTER-DEFENSIVE_FLOURISH.description": "Whenever you play a [gold]combo[/gold] card, gain {Block:diff()} [gold]Block[/gold]. If that card is a [gold]finisher[/gold], gain an additional {Block:diff()} [gold]Block[/gold].",
+  "MONSTERHUNTER-DEFENSIVE_FLOURISH.description": "Whenever you play a [gold]combo[/gold] card, gain {Block:diff()} [gold]Block[/gold].",
   "MONSTERHUNTER-DEFENSIVE_FLOURISH.title": "Defensive Flourish",
   "MONSTERHUNTER-DESTROYER_OIL.description": "Apply 1 Weak the first time you attack per turn.",
   "MONSTERHUNTER-DESTROYER_OIL.title": "Destroyer Oil",

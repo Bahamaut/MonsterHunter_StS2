@@ -13,7 +13,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Quest;
 
 [Pool(typeof(TokenCardPool))]
 public class LowRankCaptureQuest() : MonsterHunterCard(-1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.None, CardRarity.Basic,
     TargetType.Self), LowRankQuestBoard.IChoosable
 {
     public override int MaxUpgradeLevel => 0;
