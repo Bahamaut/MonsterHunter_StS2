@@ -25,7 +25,7 @@ public class HardBash() : MonsterHunterCard(2,
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(6M, ValueProp.Move),
-        new BlockVar(4M, ValueProp.Move),
+        new BlockVar(6M, ValueProp.Move),
         new StringVar("Combo"),
         new StringVar("Finisher")
     ];

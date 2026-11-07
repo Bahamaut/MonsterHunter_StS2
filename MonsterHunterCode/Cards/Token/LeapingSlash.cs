@@ -63,7 +63,7 @@ public class LeapingSlash() : MonsterHunterCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(2M);
+        this.DynamicVars.Damage.UpgradeValueBy(2M);
         this.DynamicVars["VigorPower"].UpgradeValueBy(1M);
     }
     
