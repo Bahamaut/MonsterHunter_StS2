@@ -28,8 +28,8 @@ public class FelyneInsurancePower() : MonsterHunterPower
         if (_preventedDeath)
         {
             _preventedDeath = false;
-            int num = (int)((decimal)((PowerModel)this).Owner.MaxHp * 0.30m);
-            await CreatureCmd.SetCurrentHp(((PowerModel)this).Owner, num);
+            int num = (int)(creature.MaxHp * 0.30m);
+            await CreatureCmd.SetCurrentHp(creature, num);
             await PowerCmd.Remove((PowerModel)(object)this);
             ((PowerModel)this).Flash();
         }
