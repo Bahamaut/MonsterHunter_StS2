@@ -25,7 +25,10 @@ public class MonsterHunterBlastHelper
                 (PlayerChoiceContext)new ThrowingPlayerChoiceContext(), target,
                 target.Powers.First(x => x is BlastBlightPower).Amount,
                 ValueProp.Unblockable | ValueProp.Unpowered, (CardModel)null, (CardPlay)null);
-
+            
+            if(target.IsDead)
+                return;
+                
             await PowerCmd.ModifyAmount(choiceContext, target.Powers.First(x => x is BlastPower),
                 -target.Powers.First(x => x is BlastBlightPower).Amount, applier, cardSource);
             

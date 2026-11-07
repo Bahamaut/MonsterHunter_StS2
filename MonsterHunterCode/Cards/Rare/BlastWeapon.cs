@@ -10,7 +10,7 @@ using MonsterHunter.MonsterHunterCode.Powers;
 namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class BlastWeapon() : MonsterHunterCard(2,
-    CardType.Attack, CardRarity.Rare,
+    CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
