@@ -43,8 +43,11 @@ public class ComboBreaker() : MonsterHunterCard(1,
         get
         {
             var lastCardPlayed = CombatManager.Instance.History.Entries.OfType<CardPlayFinishedEntry>()
-                .Last((e => e.HappenedThisTurn(this.CombatState) && e.Actor == this.Owner.Creature));
+                .LastOrDefault((e => e.HappenedThisTurn(this.CombatState) && e.Actor == this.Owner.Creature));
 
+            if (lastCardPlayed != null)
+                return false;
+            
             return lastCardPlayed.CardPlay.Card.DynamicVars.ContainsKey("Combo") &&
                    !lastCardPlayed.CardPlay.Card.DynamicVars.ContainsKey("Finisher");
         }
