@@ -43,6 +43,5 @@ public class Nullberry() : MonsterHunterCard(1,
     protected override void OnUpgrade()
     {
         this.DynamicVars.Block.UpgradeValueBy(3M);
-        DynamicVars.Heal.UpgradeValueBy(1M);
     }
 }

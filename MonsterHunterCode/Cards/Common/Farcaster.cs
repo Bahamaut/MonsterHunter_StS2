@@ -33,6 +33,7 @@ public class Farcaster() : MonsterHunterCard(1,
 
         foreach (var card in cards)
         {
+            CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
             await CardPileCmd.AddGeneratedCardToCombat((CardModel)(object)card, PileType.Hand, ((CardModel)this).Owner);
         }
     }
