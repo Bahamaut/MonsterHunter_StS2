@@ -26,7 +26,7 @@ public class SupplyBoxPower() : MonsterHunterPower
         IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
-        if(Owner.Player==null)
+        if(Owner.Player==null || !participants.Contains(Owner))
             return;
         
         var cards = CardFactory.GetDistinctForCombat(Owner.Player,
@@ -37,6 +37,7 @@ public class SupplyBoxPower() : MonsterHunterPower
 
         foreach (var card in cards)
         {
+            CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
             await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner.Player);
         }
     }
