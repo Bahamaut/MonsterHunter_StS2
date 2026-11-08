@@ -25,6 +25,8 @@
   "MONSTERHUNTER-BOMB_BEETLE.title": "Bomb Beetle",
   "MONSTERHUNTER-CARVE.description": "Deal {Damage:diff()} damage. Create {Cards:diff()} Consumable {Cards:plural:card|cards}.",
   "MONSTERHUNTER-CARVE.title": "Carve",
+  "MONSTERHUNTER-CHAOS_OIL.description": "Apply ALL the oils.",
+  "MONSTERHUNTER-CHAOS_OIL.title": "Chaos Oil",
   "MONSTERHUNTER-CHARGING_SLASH.description": "Deal {Damage:diff()} damage. Gain {Energy:energyIcons()}.\n[gold]Combo[/gold]",
   "MONSTERHUNTER-CHARGING_SLASH.title": "Charging Slash",
   "MONSTERHUNTER-CHOP.description": "Deal {Damage:diff()} damage. Apply {VulnerablePower:diff()} Vulnerable.\n[gold]Combo[/gold]",
