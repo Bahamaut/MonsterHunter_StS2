@@ -20,11 +20,11 @@ public class HighRankGatheringQuest() : MonsterHunterCard(-1,
 
     public override bool CanBeGeneratedInCombat => false;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<LowRankGatheringQuestPower>(1M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<HighRankGatheringQuestPower>(1M)];
 
     public async Task OnChosen(PlayerChoiceContext choiceContext)
     {
-        LowRankGatheringQuestPower lowRankGatheringQuestPower = await PowerCmd.Apply<LowRankGatheringQuestPower>(choiceContext, this.Owner.Creature,
-            this.DynamicVars[nameof(LowRankGatheringQuestPower)].BaseValue, this.Owner.Creature, (CardModel)this);
+        HighRankGatheringQuestPower highRankGatheringQuestPower = await PowerCmd.Apply<HighRankGatheringQuestPower>(choiceContext, this.Owner.Creature,
+            this.DynamicVars[nameof(HighRankGatheringQuestPower)].BaseValue, this.Owner.Creature, (CardModel)this);
     }
 }

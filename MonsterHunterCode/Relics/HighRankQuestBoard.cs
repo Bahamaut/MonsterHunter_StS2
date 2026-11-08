@@ -86,18 +86,22 @@ public class HighRankQuestBoard() : MonsterHunterRelic
     {
         if (!(this.Owner.RunState.CurrentRoom is CombatRoom) || player != this.Owner || !this.CaptureQuestComplete)
             return false;
-        var rewardToUpgrade = cardRewards.FirstOrDefault(cr => !cr.Card.IsUpgraded);
+        var rewardToUpgrade = cardRewards.Where(cr => !cr.Card.IsUpgraded);
 
         if (rewardToUpgrade == null)
             return false;
-        
-        CardModel card1 = rewardToUpgrade.Card;
-        if (card1.IsUpgradable)
+
+        foreach (var reward in rewardToUpgrade)
         {
-            CardModel card2 = this.Owner.RunState.CloneCard(card1);
-            CardCmd.Upgrade(card2);
-            rewardToUpgrade.ModifyCard(card2, (RelicModel) this);
+            CardModel card1 = reward.Card;
+            if (card1.IsUpgradable)
+            {
+                CardModel card2 = this.Owner.RunState.CloneCard(card1);
+                CardCmd.Upgrade(card2);
+                reward.ModifyCard(card2, (RelicModel)this);
+            }
         }
+
         CaptureQuestComplete = false;
         return true;
     }
