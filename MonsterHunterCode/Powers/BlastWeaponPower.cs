@@ -31,7 +31,7 @@ public class BlastWeaponPower() : MonsterHunterPower
     {
         if (dealer != this.Owner || !props.IsPoweredAttack() || result.UnblockedDamage <= 0)
             return;
-        await MonsterHunterBlastHelper.HandleBlast(new ThrowingPlayerChoiceContext(),target,this.Amount,this.Owner,null);
+        await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),target,this.Amount,this.Owner,null);
         
     }
 }

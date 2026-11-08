@@ -41,7 +41,7 @@ public class BlastFumesPower() : MonsterHunterPower
             NCreature creatureNode = NCombatRoom.Instance?.GetCreatureNode(hittableEnemy);
             if (creatureNode != null)
                 NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node) NGaseousImpactVfx.Create(creatureNode.VfxSpawnPosition, new Godot.Color("83eb85")));
-            await MonsterHunterBlastHelper.HandleBlast(new ThrowingPlayerChoiceContext(),hittableEnemy,this.Amount,this.Owner,null);
+            await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),hittableEnemy,this.Amount,this.Owner,null);
         }
     }
 }

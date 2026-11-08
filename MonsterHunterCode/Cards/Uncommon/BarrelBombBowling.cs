@@ -58,7 +58,7 @@ public class BarrelBombBowling() : MonsterHunterCard(2,
                     }
                     targetNode = (NCreature) null;
                 }
-                await MonsterHunterBlastHelper.HandleBlast(new ThrowingPlayerChoiceContext(),enemy,this.DynamicVars.Power<BlastPower>().BaseValue, this.Owner.Creature,null);
+                await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),enemy,this.DynamicVars.Power<BlastPower>().BaseValue, this.Owner.Creature,null);
             }
             enemy = (Creature) null;
         }

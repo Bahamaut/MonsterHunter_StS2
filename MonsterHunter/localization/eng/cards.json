@@ -137,6 +137,6 @@
   "MONSTERHUNTER-VITAL_STAB.title": "Vital Stab",
   "MONSTERHUNTER-WEAPON_OIL.description": "Select an oil to apply to your weapon. Will overwrite previous oils.",
   "MONSTERHUNTER-WEAPON_OIL.title": "Weapon Oil",
-  "MONSTERHUNTER-WIDE_RANGE.description": "EVERYONE gets a Health Potion.",
+  "MONSTERHUNTER-WIDE_RANGE.description": "Consumables are played on ALL allies",
   "MONSTERHUNTER-WIDE_RANGE.title": "Wide Range"
 }
