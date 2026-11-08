@@ -15,14 +15,18 @@ public class FreeMealPower() : MonsterHunterPower
 
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
+        if (!card.DynamicVars.ContainsKey("Consumable"))
+            return playCount;
+
         return card.Owner.Creature != this.Owner ||
                CombatManager.Instance.History.CardPlaysStarted.Count(
-                   (e => e.Actor == this.Owner && e.CardPlay.IsFirstInSeries && e.HappenedThisTurn(this.CombatState) &&
-                         e.CardPlay.Card.DynamicVars.ContainsKey("Consumable"))) >= this.Amount
+                   (e => e.Actor == this.Owner && e.CardPlay.IsFirstInSeries
+                       && e.HappenedThisTurn(this.CombatState) &&
+                       e.CardPlay.Card.DynamicVars.ContainsKey("Consumable"))) >= this.Amount
             ? playCount
             : playCount + 1;
     }
-    
+
     public override Task AfterModifyingCardPlayCount(CardModel card)
     {
         this.Flash();
