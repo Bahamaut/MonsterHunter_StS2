@@ -31,7 +31,7 @@ public class LowRankGatheringQuestPower() : MonsterHunterPower
             potion = PotionFactory.CreateRandomPotionOutOfCombat(this.Owner.Player,
                 this.Owner.Player.PlayerRng.Rewards,
                 PotionFactory.GetPotionOptions(Owner.Player).Where(p =>
-                    p.Rarity != PotionRarity.Common && p.Rarity != PotionRarity.Uncommon));
+                    p.Rarity != PotionRarity.Common));
         }
 
         room.AddExtraReward(this.Owner.Player, (Reward)new PotionReward(potion.ToMutable(), this.Owner.Player));
