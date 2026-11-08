@@ -23,41 +23,9 @@ public class LowRankSlayQuestPower() : MonsterHunterPower
     public override PowerStackType StackType =>
         PowerStackType.Single;
     
-    public bool _dealtFatalThisCombat;
-    
-    [SavedProperty]
-    public bool DealtFatalThisCombat
-    {
-        get => this._dealtFatalThisCombat;
-        set
-        {
-            this.AssertMutable();
-            this._dealtFatalThisCombat = value;
-        }
-    }
-
-    public override async Task AfterDamageGiven(
-        PlayerChoiceContext choiceContext,
-        Creature? dealer,
-        DamageResult result,
-        ValueProp props,
-        Creature target,
-        CardModel? cardSource)
-    {
-        if (dealer == null || dealer != this.Owner && dealer.PetOwner?.Creature != this.Owner ||
-            !props.IsPoweredAttack() || result.TotalDamage <= 0 || target.IsAlive || !target.IsPrimaryEnemy)
-            return;
-        _dealtFatalThisCombat = true;
-    }
-    
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        if (this.DealtFatalThisCombat){
-            room.AddExtraReward(this.Owner.Player, (Reward) new GoldReward(20, this.Owner.Player));
-            return Task.CompletedTask;
-        }
-        
-        room.AddExtraReward(this.Owner.Player, (Reward) new GoldReward(10, this.Owner.Player));
+        room.AddExtraReward(this.Owner.Player, (Reward) new GoldReward(15, this.Owner.Player));
         return Task.CompletedTask;
     }
 }

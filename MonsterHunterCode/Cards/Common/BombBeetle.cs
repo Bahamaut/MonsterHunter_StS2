@@ -24,7 +24,7 @@ public class BombBeetle() : MonsterHunterCard(1,
     {
         ArgumentNullException.ThrowIfNull((object) play.Target, "play.Target");
         await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        await MonsterHunterBlastHelper.HandleBlast(choiceContext, play.Target, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
+        await MonsterHunterBlastCmd.HandleBlast(choiceContext, play.Target, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
     }
 
     protected override void OnUpgrade() => this.DynamicVars.Power<BlastPower>().UpgradeValueBy(2M);

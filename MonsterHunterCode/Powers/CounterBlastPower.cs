@@ -28,7 +28,7 @@ public class CounterBlastPower() : MonsterHunterPower
     {
         if (target != this.Owner || result.BlockedDamage <= 0 || !props.IsPoweredAttack() || dealer == null)
             return;
-        await MonsterHunterBlastHelper.HandleBlast(new ThrowingPlayerChoiceContext(),dealer,result.BlockedDamage,this.Owner,null);
+        await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),dealer,result.BlockedDamage,this.Owner,null);
     }
 
     public override async Task AfterSideTurnStart(

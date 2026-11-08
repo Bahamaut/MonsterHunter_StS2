@@ -35,7 +35,7 @@ public class BlastToad() : MonsterHunterCard(2, CardType.Skill, CardRarity.Uncom
             NCreature creatureNode = NCombatRoom.Instance?.GetCreatureNode(hittableEnemy);
             if (creatureNode != null)
                 NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node) NGaseousImpactVfx.Create(creatureNode.VfxSpawnPosition, new Godot.Color("83eb85")));
-            await MonsterHunterBlastHelper.HandleBlast(new ThrowingPlayerChoiceContext(),hittableEnemy,this.DynamicVars.Power<BlastPower>().BaseValue, this.Owner.Creature,null);
+            await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),hittableEnemy,this.DynamicVars.Power<BlastPower>().BaseValue, this.Owner.Creature,null);
         }
         IReadOnlyList<VulnerablePower> vulnerablePowerList = await PowerCmd.Apply<VulnerablePower>(choiceContext, (IEnumerable<Creature>) this.CombatState?.HittableEnemies, this.DynamicVars.Vulnerable.BaseValue, this.Owner.Creature, (CardModel) this);
     }

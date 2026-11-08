@@ -8,7 +8,7 @@ using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Commands;
 
-public class MonsterHunterBlastHelper
+public class MonsterHunterBlastCmd
 {
     public static async Task HandleBlast(PlayerChoiceContext choiceContext, Creature target, decimal amount,
         Creature? applier, CardModel? cardSource)

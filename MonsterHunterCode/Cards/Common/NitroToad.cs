@@ -27,7 +27,7 @@ public class NitroToad() : MonsterHunterCard(2,
         ArgumentNullException.ThrowIfNull((object) play.Target, "play.Target");
         await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
         VfxCmd.PlayOnCreatureCenter(play.Target, "vfx/vfx_bite");
-        await MonsterHunterBlastHelper.HandleBlast(choiceContext, play.Target, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
+        await MonsterHunterBlastCmd.HandleBlast(choiceContext, play.Target, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
     }
 
     protected override void OnUpgrade() => this.DynamicVars.Power<BlastPower>().UpgradeValueBy(3M);
