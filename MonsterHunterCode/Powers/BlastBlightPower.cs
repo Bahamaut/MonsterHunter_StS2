@@ -6,7 +6,7 @@ namespace MonsterHunter.MonsterHunterCode.Powers;
 public class BlastBlightPower() : MonsterHunterPower
 {
     public override PowerType Type =>
-        PowerType.Debuff;
+        PowerType.None;
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
