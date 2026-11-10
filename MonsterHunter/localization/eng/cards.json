@@ -104,7 +104,7 @@
   "MONSTERHUNTER-MINDS_EYE_OIL.title": "Mind's Eye Oil",
   "MONSTERHUNTER-MUSHROOMANCER.description": "Deal {CalculatedDamage:diff()} damage.\\nDeals {ExtraDamage:diff()} additional damage for ALL your consumable cards",
   "MONSTERHUNTER-MUSHROOMANCER.title": "Mushroomancer",
-  "MONSTERHUNTER-NITRO_TOAD.description": "Apply {BlastPower:diff()} blast.",
+  "MONSTERHUNTER-NITRO_TOAD.description": "Apply {BlastPower:diff()} [gold]Blast[/gold].",
   "MONSTERHUNTER-NITRO_TOAD.title": "Nitro Toad",
   "MONSTERHUNTER-NULLBERRY.description": "Gain {Block:diff()} Block. Remove half your Vulnerable, Weak and Frail rounded up",
   "MONSTERHUNTER-NULLBERRY.title": "Nullberry",
