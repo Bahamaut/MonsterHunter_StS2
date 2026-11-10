@@ -1,5 +1,8 @@
 {
-  "MONSTERHUNTER-LOW_RANK_QUEST_BOARD.description": "At the start of combat, choose a quest to undertake!",
+  "MONSTERHUNTER-HIGH_RANK_QUEST_BOARD.description": "At the start of combat, choose a high rank quest to undertake!",
+  "MONSTERHUNTER-HIGH_RANK_QUEST_BOARD.flavor": "Wowee",
+  "MONSTERHUNTER-HIGH_RANK_QUEST_BOARD.title": "High Rank Quest Board",
+  "MONSTERHUNTER-LOW_RANK_QUEST_BOARD.description": "At the start of combat, choose a low rank quest to undertake!",
   "MONSTERHUNTER-LOW_RANK_QUEST_BOARD.flavor": "Wowee",
   "MONSTERHUNTER-LOW_RANK_QUEST_BOARD.title": "Low Rank Quest Board"
 }

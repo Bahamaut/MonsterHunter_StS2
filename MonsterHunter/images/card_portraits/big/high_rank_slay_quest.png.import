@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxlcibctovinq"
-path="res://.godot/imported/weaponOil.png-f90eed58be74e94c570ad52ccd915c22.ctex"
+uid="uid://cl6v3y0rdpoyx"
+path="res://.godot/imported/high_rank_slay_quest.png-33db93937cf1ca6b59b8de792a29d535.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MonsterHunter/images/relics/big/weaponOil.png"
-dest_files=["res://.godot/imported/weaponOil.png-f90eed58be74e94c570ad52ccd915c22.ctex"]
+source_file="res://MonsterHunter/images/card_portraits/big/high_rank_slay_quest.png"
+dest_files=["res://.godot/imported/high_rank_slay_quest.png-33db93937cf1ca6b59b8de792a29d535.ctex"]
 
 [params]
 
