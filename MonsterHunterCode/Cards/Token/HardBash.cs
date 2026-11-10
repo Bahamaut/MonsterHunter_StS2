@@ -52,8 +52,8 @@ public class HardBash() : MonsterHunterCard(2,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(2M);
-        this.DynamicVars.Block.UpgradeValueBy(2M);
+        this.DynamicVars.Damage.UpgradeValueBy(4M);
+        this.DynamicVars.Block.UpgradeValueBy(4M);
     }
     
     //Remove the card if moved to deck somehow
