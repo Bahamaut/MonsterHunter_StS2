@@ -12,7 +12,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
 public class HeadToHead() : MonsterHunterCard(1,
     CardType.Attack, CardRarity.Common,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9M, ValueProp.Move)];
 

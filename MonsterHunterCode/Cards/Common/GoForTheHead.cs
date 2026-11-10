@@ -1,6 +1,7 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -14,6 +15,18 @@ public class GoForTheHead() : MonsterHunterCard(0,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
+    protected override bool ShouldGlowGoldInternal
+    {
+        get
+        {
+            return this.CombatState != null && this.CombatState.HittableEnemies.Any<Creature>((Func<Creature, bool>) (e =>
+            {
+                MonsterModel monster = e.Monster;
+                return monster != null && !monster.IntendsToAttack;
+            }));
+        }
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(3M, ValueProp.Move),
         new PowerVar<VulnerablePower>(1M)
@@ -27,7 +40,7 @@ public class GoForTheHead() : MonsterHunterCard(0,
         AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard((CardModel) this, cardPlay).Targeting(cardPlay.Target).WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
         if (cardPlay.Target.Monster.IntendsToAttack)
             return;
-        VulnerablePower vulnerablePowerPower = await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, this.DynamicVars.Weak.BaseValue, this.Owner.Creature, (CardModel) this);
+        VulnerablePower vulnerablePowerPower = await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, this.DynamicVars.Vulnerable.BaseValue, this.Owner.Creature, (CardModel) this);
     }
 
     protected override void OnUpgrade()
