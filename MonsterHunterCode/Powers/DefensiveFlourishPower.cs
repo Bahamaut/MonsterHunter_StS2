@@ -20,9 +20,9 @@ public class DefensiveFlourishPower() : MonsterHunterPower
 
     public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner.Creature == Owner && cardPlay.Card.DynamicVars.ContainsKey("Combo"))
+        if (cardPlay.Card.Owner.Creature == Owner && (cardPlay.Card.DynamicVars.ContainsKey("Combo") || cardPlay.Card.DynamicVars.ContainsKey("Finisher")))
         {
-            Decimal num = await CreatureCmd.GainBlock(this.Owner, (Decimal) this.Amount, ValueProp.Unpowered, (CardPlay) null);
+            Decimal num = await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
         }
     }
 }

@@ -19,8 +19,8 @@ public class PerfectRush() : MonsterHunterCard(2,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
-        new RepeatVar(3),
+        new DamageVar(5M, ValueProp.Move),
+        new RepeatVar(4),
         new StringVar("Combo"),
         new StringVar("Finisher")
     ];
