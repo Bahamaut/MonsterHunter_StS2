@@ -14,6 +14,18 @@ public class IntentStrike() : MonsterHunterCard(2,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
+    protected override bool ShouldGlowGoldInternal
+    {
+        get
+        {
+            return this.CombatState != null && this.CombatState.HittableEnemies.Any<Creature>((Func<Creature, bool>) (e =>
+            {
+                MonsterModel monster = e.Monster;
+                return monster != null && monster.IntendsToAttack;
+            }));
+        }
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         (DynamicVar)new CalculationBaseVar(9M),
         (DynamicVar)new ExtraDamageVar(9M),
