@@ -88,5 +88,14 @@
   "MONSTERHUNTER-SUPPLY_BOX_POWER.title": "SupplyBoxPower",
   "MONSTERHUNTER-WIDE_RANGE_POWER.description": "",
   "MONSTERHUNTER-WIDE_RANGE_POWER.smartDescription": "",
-  "MONSTERHUNTER-WIDE_RANGE_POWER.title": "WideRangePower"
+  "MONSTERHUNTER-WIDE_RANGE_POWER.title": "WideRangePower",
+  "MONSTERHUNTER-SONG_O_POWER_POWER.description": "",
+  "MONSTERHUNTER-SONG_O_POWER_POWER.smartDescription": "",
+  "MONSTERHUNTER-SONG_O_POWER_POWER.title": "SongOPowerPower",
+  "MONSTERHUNTER-SONG_O_PURRTECTION_POWER.description": "",
+  "MONSTERHUNTER-SONG_O_PURRTECTION_POWER.smartDescription": "",
+  "MONSTERHUNTER-SONG_O_PURRTECTION_POWER.title": "SongOPurrtectionPower",
+  "MONSTERHUNTER-BLAST_GUARD_POWER.description": "",
+  "MONSTERHUNTER-BLAST_GUARD_POWER.smartDescription": "",
+  "MONSTERHUNTER-BLAST_GUARD_POWER.title": "BlastGuardPower"
 }
