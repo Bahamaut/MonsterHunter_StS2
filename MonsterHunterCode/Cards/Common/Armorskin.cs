@@ -3,16 +3,12 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
-public class Armorskin() : MonsterHunterCard(0,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+public class Armorskin() : MonsterHunterCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -22,14 +18,12 @@ public class Armorskin() : MonsterHunterCard(0,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DexterityPower>()];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        ArmorskinPower armorskinPower = await PowerCmd.Apply<ArmorskinPower>(choiceContext, this.Owner.Creature,
-            this.DynamicVars.Dexterity.BaseValue, this.Owner.Creature, (CardModel)this);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await PowerCmd.Apply<ArmorskinPower>(choiceContext, Owner.Creature,
+            DynamicVars.Dexterity.BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Dexterity.UpgradeValueBy(2M);
+    protected override void OnUpgrade() => DynamicVars.Dexterity.UpgradeValueBy(2M);
 }

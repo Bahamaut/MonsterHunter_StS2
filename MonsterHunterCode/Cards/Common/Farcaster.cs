@@ -5,38 +5,35 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Character;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
-public class Farcaster() : MonsterHunterCard(1,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+public class Farcaster() : MonsterHunterCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
+    public override bool GainsBlock => true;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(8M, ValueProp.Move),
         new CardsVar(1)
     ];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         
-        var cards = CardFactory.GetDistinctForCombat(this.Owner,
-            ModelDb.CardPool<MonsterHunterCardPool>().GetUnlockedCards(play.Player.UnlockState,
-                play.Player.RunState.CardMultiplayerConstraint).Where(c =>
+        var cards = CardFactory.GetDistinctForCombat(Owner,
+            ModelDb.CardPool<MonsterHunterCardPool>().GetUnlockedCards(cardPlay.Player.UnlockState,
+                cardPlay.Player.RunState.CardMultiplayerConstraint).Where(c =>
                 c.DynamicVars.ContainsKey("Consumable") && c.Rarity != CardRarity.Rare),
-            this.DynamicVars.Cards.IntValue, this.Owner.RunState.Rng.CombatCardGeneration);
+            DynamicVars.Cards.IntValue, Owner.RunState.Rng.CombatCardGeneration);
 
         foreach (var card in cards)
         {
             CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
-            await CardPileCmd.AddGeneratedCardToCombat((CardModel)(object)card, PileType.Hand, ((CardModel)this).Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
         }
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Block.UpgradeValueBy(3M);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3M);
 }

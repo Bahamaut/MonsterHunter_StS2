@@ -4,28 +4,24 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Commands;
 using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
-public class BombBeetle() : MonsterHunterCard(1,
-    CardType.Skill, CardRarity.Common,
-    TargetType.AnyEnemy)
+public class BombBeetle() : MonsterHunterCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BlastPower>(5M)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BlastPower>()];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull((object) play.Target, "play.Target");
-        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        await MonsterHunterBlastCmd.HandleBlast(choiceContext, play.Target, DynamicVars.Power<BlastPower>().BaseValue,this.Owner.Creature,this);
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await MonsterHunterBlastCmd.HandleBlast(choiceContext, cardPlay.Target, 
+            DynamicVars.Power<BlastPower>().BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Power<BlastPower>().UpgradeValueBy(2M);
+    protected override void OnUpgrade() => DynamicVars.Power<BlastPower>().UpgradeValueBy(2M);
 }

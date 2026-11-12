@@ -8,9 +8,7 @@ using MonsterHunter.MonsterHunterCode.Cards;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
-public class TakeABreather() : MonsterHunterCard(1,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+public class TakeABreather() : MonsterHunterCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override bool GainsBlock => true;
     
@@ -19,13 +17,11 @@ public class TakeABreather() : MonsterHunterCard(1,
         new CardsVar(1)
     ];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        IEnumerable<CardModel> cardModels = await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Block.UpgradeValueBy(3M);
+    protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3M);
 }
