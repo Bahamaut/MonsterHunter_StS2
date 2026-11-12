@@ -1,4 +1,10 @@
 {
+  "MONSTERHUNTER-ADAPTABILITY_POWER.description": "",
+  "MONSTERHUNTER-ADAPTABILITY_POWER.smartDescription": "",
+  "MONSTERHUNTER-ADAPTABILITY_POWER.title": "AdaptabilityPower",
+  "MONSTERHUNTER-ADRENALINE_RUSH_POWER.description": "",
+  "MONSTERHUNTER-ADRENALINE_RUSH_POWER.smartDescription": "",
+  "MONSTERHUNTER-ADRENALINE_RUSH_POWER.title": "AdrenalineRushPower",
   "MONSTERHUNTER-AFFINITY_OIL_POWER.description": "Gain up to 2 Temporary Strength when attacking",
   "MONSTERHUNTER-AFFINITY_OIL_POWER.smartDescription": "Gain up to 2 Temporary Strength when attacking",
   "MONSTERHUNTER-AFFINITY_OIL_POWER.title": "Affinity Oil",
