@@ -22,7 +22,9 @@ public class FelyneInsurance() : MonsterHunterCard(3,
     {
         await CreatureCmd.TriggerAnim(this.Owner.Creature, "PowerUp", this.Owner.Character.PowerUpAnimDelay);
         FelyneInsurancePower felyneInsurancePower = await PowerCmd.Apply<FelyneInsurancePower>(choiceContext,
-            this.Owner.Creature, 1M, this.Owner.Creature, (CardModel)this);
+            this.Owner.Creature, 1M, this.Owner.Creature, this);
+        await CardPileCmd.RemoveFromDeck(this.DeckVersion);
+        this.DeckVersion = null;
     }
 
     protected override void OnUpgrade() => this.EnergyCost.UpgradeBy(-1);

@@ -38,6 +38,7 @@ public class OverwhelmingDefense() : MonsterHunterCard(3,
                 CoveredPower coveredPower = await PowerCmd.Apply<CoveredPower>((PlayerChoiceContext) new ThrowingPlayerChoiceContext(), target, 1M, this.Owner.Creature, (CardModel) null);
             }
         }
+        PlayerCmd.EndTurn(play.Player, canBackOut: false);
     }
 
     protected override void OnUpgrade() => this.DynamicVars.Block.UpgradeValueBy(10M);
