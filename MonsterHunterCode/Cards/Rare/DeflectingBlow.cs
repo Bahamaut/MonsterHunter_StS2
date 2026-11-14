@@ -30,19 +30,20 @@ public class DeflectingBlow() : MonsterHunterCard(3,
         PlayerChoiceContext choiceContext,
         CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull((object)cardPlay.Target, "cardPlay.Target");
-        AttackCommand attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this, cardPlay)
-            .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
-        var blocktoGain = cardPlay.Target.Monster.IntendsToAttack
-            ? DynamicVars.Damage.BaseValue
-            : Math.Ceiling(DynamicVars.Damage.BaseValue / 2);
-
-        Decimal num =
-            await CreatureCmd.GainBlock(this.Owner.Creature, new BlockVar(blocktoGain, ValueProp.Move), cardPlay);
+        await CreatureCmd.GainBlock(Owner.Creature,
+            (await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this, cardPlay)
+                .Targeting(cardPlay.Target)
+                .WithHitFx("vfx/vfx_attack_slash")
+                .Execute(choiceContext)).Results
+            .SelectMany(r => r)
+            .Sum((Func<DamageResult, int>)(r =>
+                cardPlay.Target.Monster.IntendsToAttack
+                    ? r.TotalDamage + r.OverkillDamage
+                    : (int)Math.Ceiling((decimal)(r.TotalDamage + r.OverkillDamage) / 2))), 
+            ValueProp.Move, cardPlay);
     }
 
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(6M);

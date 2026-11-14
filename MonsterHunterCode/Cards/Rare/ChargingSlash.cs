@@ -17,7 +17,7 @@ public class ChargingSlash() : MonsterHunterCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
         new EnergyVar(1),
         new StringVar("Combo")
     ];

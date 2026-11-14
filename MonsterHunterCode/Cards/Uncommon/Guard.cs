@@ -20,7 +20,7 @@ public class Guard() : MonsterHunterCard(1,
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(5M, ValueProp.Move),
+        new BlockVar(8M, ValueProp.Move),
         new StringVar("Combo")
     ];
     
@@ -46,6 +46,6 @@ public class Guard() : MonsterHunterCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(2M);
+        this.DynamicVars.Block.UpgradeValueBy(3M);
     }
 }

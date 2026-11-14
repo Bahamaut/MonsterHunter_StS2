@@ -27,7 +27,7 @@ public class ExpeditedDetonation() : MonsterHunterCard(2,
                 ? play.Target.Powers.First(x => x is BlastPower).Amount
                 : 0;
             
-            MonsterHunterBlastCmd.HandleBlast(choiceContext, play.Target, blastBlightAmount-blastAmount,play.Player.Creature, this);
+            await MonsterHunterBlastCmd.HandleBlast(choiceContext, play.Target, blastBlightAmount-blastAmount,play.Player.Creature, this);
         }
     }
 

@@ -19,7 +19,7 @@ public class Roundslash() : MonsterHunterCard(1,
     TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(6M, ValueProp.Move),
         new StringVar("Combo"),
         new StringVar("Finisher")
     ];

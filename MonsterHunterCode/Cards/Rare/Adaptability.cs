@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MonsterHunter.MonsterHunterCode.Cards;
+using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
@@ -21,7 +22,7 @@ public class Adaptability() : MonsterHunterCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        AdaptablePower pyrePower = await PowerCmd.Apply<AdaptablePower>(choiceContext, this.Owner.Creature, 1M, this.Owner.Creature, (CardModel) this);
+        AdaptabilityPower adaptabilityPower = await PowerCmd.Apply<AdaptabilityPower>(choiceContext, this.Owner.Creature, 1M, this.Owner.Creature, (CardModel) this);
     }
 
     protected override void OnUpgrade() => this.AddKeyword(CardKeyword.Innate);

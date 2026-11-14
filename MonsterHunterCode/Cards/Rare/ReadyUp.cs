@@ -14,6 +14,9 @@ public class ReadyUp() : MonsterHunterCard(0,
     CardType.Attack, CardRarity.Basic,
     TargetType.AnyEnemy)
 {
+    protected override bool ShouldGlowGoldInternal =>
+        CombatState != null && CombatState.HittableEnemies.Any(e =>
+            e.Monster != null && e.Monster.IntendsToAttack);
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4M, ValueProp.Move)];
 
     protected override async Task OnPlay(
@@ -25,6 +28,9 @@ public class ReadyUp() : MonsterHunterCard(0,
             .FromCard((CardModel)this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
+        if (cardPlay.Target.Monster != null && !cardPlay.Target.Monster.IntendsToAttack)
+            return;
+        
         foreach (CardModel card in PileType.Draw.GetPile(this.Owner).Cards
                      .Where<CardModel>((Func<CardModel, bool>)(c => c.DynamicVars.ContainsKey("Combo")))
                      .ToList<CardModel>().UnstableShuffle<CardModel>(this.Owner.RunState.Rng.CombatCardSelection)

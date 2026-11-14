@@ -12,7 +12,7 @@ public class SpinningRisingSlash() : MonsterHunterCard(1, CardType.Attack, CardR
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(8M, ValueProp.Move),
         new StringVar("Combo")
     ];
 

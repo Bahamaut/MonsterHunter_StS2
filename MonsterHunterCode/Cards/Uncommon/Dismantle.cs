@@ -13,7 +13,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
 public class Dismantle() : MonsterHunterCard(1,
     CardType.Attack, CardRarity.Uncommon,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
     protected override bool ShouldGlowGoldInternal
     {

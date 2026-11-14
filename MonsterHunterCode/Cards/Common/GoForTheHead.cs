@@ -11,7 +11,7 @@ public class GoForTheHead() : MonsterHunterCard(0, CardType.Attack, CardRarity.C
 {
     protected override bool ShouldGlowGoldInternal =>
         CombatState != null && CombatState.HittableEnemies.Any(e =>
-            e.Monster != null && !e.Monster.IntendsToAttack);
+            e.Monster != null && e.Monster.IntendsToAttack);
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -27,7 +27,7 @@ public class GoForTheHead() : MonsterHunterCard(0, CardType.Attack, CardRarity.C
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
-        if (cardPlay.Target.Monster != null && cardPlay.Target.Monster.IntendsToAttack)
+        if (cardPlay.Target.Monster != null && !cardPlay.Target.Monster.IntendsToAttack)
             return;
 
         await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target,

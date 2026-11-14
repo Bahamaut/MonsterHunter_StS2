@@ -22,7 +22,7 @@ public class LeapingSlash() : MonsterHunterCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5M, ValueProp.Move),
+        new DamageVar(9M, ValueProp.Move),
         (DynamicVar) new PowerVar<VigorPower>(2M),
         new StringVar("Combo")
     ];
@@ -63,7 +63,7 @@ public class LeapingSlash() : MonsterHunterCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(2M);
+        this.DynamicVars.Damage.UpgradeValueBy(3M);
         this.DynamicVars["VigorPower"].UpgradeValueBy(1M);
     }
     

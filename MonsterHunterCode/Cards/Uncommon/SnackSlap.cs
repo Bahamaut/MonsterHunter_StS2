@@ -17,7 +17,7 @@ public class SnackSlap() : MonsterHunterCard(0,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(3M, ValueProp.Move)
+        new DamageVar(2M, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

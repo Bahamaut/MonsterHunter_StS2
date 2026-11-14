@@ -13,8 +13,8 @@ public class ShieldBash() : MonsterHunterCard(1, CardType.Attack, CardRarity.Com
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4M, ValueProp.Move),
-        new BlockVar(4M, ValueProp.Move),
+        new DamageVar(5M, ValueProp.Move),
+        new BlockVar(5M, ValueProp.Move),
         new StringVar("Combo")
     ];
     

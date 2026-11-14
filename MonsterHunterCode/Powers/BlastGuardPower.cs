@@ -2,7 +2,9 @@
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Powers;
@@ -19,7 +21,7 @@ public class BlastGuardPower() : MonsterHunterPower
         CardModel? cardSource)
     {
         if(power is BlastPower && amount < 0)
-            await CreatureCmd.GainBlock(this.Owner, this.DynamicVars.Block, null);
+            await CreatureCmd.GainBlock(this.Owner, new BlockVar(Amount, ValueProp.Move), null);
         
         base.AfterPowerAmountChanged(choiceContext, power, amount, applier, cardSource);
     }

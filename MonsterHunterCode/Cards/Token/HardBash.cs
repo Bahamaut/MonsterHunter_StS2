@@ -24,8 +24,8 @@ public class HardBash() : MonsterHunterCard(2,
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
-        new BlockVar(6M, ValueProp.Move),
+        new DamageVar(10M, ValueProp.Move),
+        new BlockVar(10M, ValueProp.Move),
         new StringVar("Combo"),
         new StringVar("Finisher")
     ];
@@ -52,7 +52,7 @@ public class HardBash() : MonsterHunterCard(2,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(4M);
+        this.DynamicVars.Damage.UpgradeValueBy(4);
         this.DynamicVars.Block.UpgradeValueBy(4M);
     }
     

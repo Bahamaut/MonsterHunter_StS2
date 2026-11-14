@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -33,13 +34,17 @@ public class StompingIntent() : MonsterHunterCard(3,
 
     protected override void OnUpgrade() => this.DynamicVars.Damage.UpgradeValueBy(3M);
 
-    public override Task AfterCardEnteredCombat(CardModel card)
+    public override bool TryModifyEnergyCostInCombat(
+        CardModel card,
+        Decimal originalCost,
+        out Decimal modifiedCost)
     {
-        if (card != this || this.IsClone)
-            return Task.CompletedTask;
-        ReduceCostBy(CombatManager.Instance.StateTracker._state.HittableEnemies.Count(e => e.Monster.IntendsToAttack));
-        return Task.CompletedTask;
+        modifiedCost = originalCost;
+        if (card != this || originalCost <= 0M || CombatState == null)
+            return false;
+        
+        modifiedCost = Math.Max(0M, originalCost - CombatState.HittableEnemies.Count(e =>
+            e.Monster != null && e.Monster.IntendsToAttack));
+        return true;
     }
-
-    public void ReduceCostBy(int amount) => this.EnergyCost.AddThisTurn(-amount);
 }

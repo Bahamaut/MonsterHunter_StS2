@@ -10,7 +10,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class TheRightTool() : MonsterHunterCard(1,
     CardType.Attack, CardRarity.Rare,
-    TargetType.AnyEnemy)
+    TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 

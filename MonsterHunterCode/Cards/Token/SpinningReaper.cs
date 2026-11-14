@@ -19,7 +19,7 @@ public class SpinningReaper() : MonsterHunterCard(1,
     TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6M, ValueProp.Move),
+        new DamageVar(8M, ValueProp.Move),
         new StringVar("Combo"),
         new StringVar("Finisher")
     ];
@@ -44,7 +44,7 @@ public class SpinningReaper() : MonsterHunterCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3M);
+        DynamicVars.Damage.UpgradeValueBy(2M);
     }
     
     //Remove the card if moved to deck somehow

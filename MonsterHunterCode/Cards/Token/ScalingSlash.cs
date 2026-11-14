@@ -22,7 +22,7 @@ public class ScalingSlash() : MonsterHunterCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(6M, ValueProp.Move),
+        new DamageVar(8M, ValueProp.Move),
         new PowerVar<VulnerablePower>(1M),
         new StringVar("Combo")
     ];
@@ -66,7 +66,7 @@ public class ScalingSlash() : MonsterHunterCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4M);
+        DynamicVars.Damage.UpgradeValueBy(2M);
     }
     
     //Remove the card if moved to deck somehow

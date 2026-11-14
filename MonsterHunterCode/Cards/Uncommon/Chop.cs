@@ -21,7 +21,7 @@ public class Chop() : MonsterHunterCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4M, ValueProp.Move),
+        new DamageVar(8M, ValueProp.Move),
         new PowerVar<VulnerablePower>(1M),
         new StringVar("Combo")
     ];

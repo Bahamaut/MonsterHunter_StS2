@@ -12,7 +12,7 @@ public class AdvancingSlash() : MonsterHunterCard(1, CardType.Attack, CardRarity
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8M, ValueProp.Move),
+        new DamageVar(9M, ValueProp.Move),
         new StringVar("Combo")
     ];
 
@@ -38,6 +38,6 @@ public class AdvancingSlash() : MonsterHunterCard(1, CardType.Attack, CardRarity
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4M);
+        DynamicVars.Damage.UpgradeValueBy(3M);
     }
 }

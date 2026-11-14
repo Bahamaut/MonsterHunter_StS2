@@ -17,6 +17,10 @@ public class Nullberry() : MonsterHunterCard(1,
         new BlockVar(5M, ValueProp.Move),
         new StringVar("Consumable")
     ];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        CardKeyword.Exhaust
+    ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
