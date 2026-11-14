@@ -11,13 +11,13 @@ public class ExpeditedDetonation() : MonsterHunterCard(2,
     CardType.Skill, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new RepeatVar(0)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new RepeatVar(1)];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        for (int i = 0; i <= DynamicVars.Repeat.BaseValue; i++)
+        for (int i = 0; i < DynamicVars.Repeat.BaseValue; i++)
         {
             var blastBlightAmount = play.Target.HasPower<BlastBlightPower>()
                 ? play.Target.Powers.First(x => x is BlastBlightPower).Amount
