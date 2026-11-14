@@ -24,7 +24,7 @@ public class SongOPurrtection() : MonsterHunterCard(1,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<BracePower>()
+        HoverTipFactory.FromPower<StretchPower>()
     ];
 
     protected override async Task OnPlay(

@@ -29,7 +29,7 @@ public class SongOPurrtectionPower() : MonsterHunterPower
         foreach (Player player in (IEnumerable<Player>) ((combatState != null ? (object) combatState.Players : (object) null) ?? (object) Array.Empty<Player>()))
         {
             await CreatureCmd.TriggerAnim(player.Creature, "PowerUp", player.Character.PowerUpAnimDelay);
-            BracePower bracePower = await PowerCmd.Apply<BracePower>(choiceContext, player.Creature, this.Amount, this.Owner, null);
+            StretchPower stretchPower = await PowerCmd.Apply<StretchPower>(choiceContext, player.Creature, this.Amount, this.Owner, null);
         }
     }
 }

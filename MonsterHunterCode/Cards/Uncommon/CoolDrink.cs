@@ -14,7 +14,7 @@ public class CoolDrink() : MonsterHunterCard(0,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<BracePower>(4M),
+        new PowerVar<StretchPower>(4M),
         new StringVar("Consumable")
     ];
 
@@ -22,9 +22,9 @@ public class CoolDrink() : MonsterHunterCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        BracePower bracePower = await PowerCmd.Apply<BracePower>(choiceContext, Owner.Creature,
-            DynamicVars.Power<BracePower>().IntValue, Owner.Creature, this);
+        StretchPower stretchPower = await PowerCmd.Apply<StretchPower>(choiceContext, Owner.Creature,
+            DynamicVars.Power<StretchPower>().IntValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Power<BracePower>().UpgradeValueBy(3M);
+    protected override void OnUpgrade() => this.DynamicVars.Power<StretchPower>().UpgradeValueBy(3M);
 }

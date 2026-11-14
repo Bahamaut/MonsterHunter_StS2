@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Powers;
@@ -19,23 +20,23 @@ public class BraceBlock() : MonsterHunterCard(1,
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         (DynamicVar) new BlockVar(8M, ValueProp.Move),
-        new PowerVar<BracePower>(4M)
+        new PowerVar<StretchPower>(4M)
     ];
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BracePower>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StretchPower>()];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        BracePower bracePower = await PowerCmd.Apply<BracePower>(choiceContext, Owner.Creature,
-            DynamicVars.Power<BracePower>().IntValue, Owner.Creature, this);
+        StretchPower stretchPower = await PowerCmd.Apply<StretchPower>(choiceContext, Owner.Creature,
+            DynamicVars.Power<StretchPower>().IntValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(2M);
-        DynamicVars.Power<BracePower>().UpgradeValueBy(3M);
+        DynamicVars.Power<StretchPower>().UpgradeValueBy(3M);
     }
 }
