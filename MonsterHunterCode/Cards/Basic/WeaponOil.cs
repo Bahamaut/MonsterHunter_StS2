@@ -17,16 +17,14 @@ public class WeaponOil() : MonsterHunterCard(0, CardType.Skill, CardRarity.Basic
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<AffinityOilPower>(),
         HoverTipFactory.FromPower<StaminaOilPower>(),
         HoverTipFactory.FromPower<DestroyerOilPower>(),
         HoverTipFactory.FromPower<MindsEyeOilPower>()
     ];
 
-    private static IReadOnlyList<IChoosable> WeaponOils =>
-        [
+    private static IReadOnlyList<IChoosable> WeaponOils => [
             ModelDb.Card<AffinityOil>(),
             ModelDb.Card<StaminaOil>(),
             ModelDb.Card<DestroyerOil>(),

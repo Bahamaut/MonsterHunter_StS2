@@ -10,8 +10,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
 public class Armorskin() : MonsterHunterCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<DexterityPower>(2M),
         new StringVar("Consumable")
     ];

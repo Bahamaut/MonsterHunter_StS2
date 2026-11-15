@@ -14,8 +14,7 @@ public class BlastStrike() : MonsterHunterCard(1, CardType.Attack, CardRarity.Co
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(6M, ValueProp.Move),
         new PowerVar<BlastPower>(3M)
     ];

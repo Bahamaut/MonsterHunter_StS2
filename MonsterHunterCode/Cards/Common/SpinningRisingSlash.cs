@@ -10,8 +10,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
 public class SpinningRisingSlash() : MonsterHunterCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(8M, ValueProp.Move),
         new StringVar("Combo")
     ];

@@ -16,8 +16,7 @@ public class XDamage() : MonsterHunterCard(0, CardType.Attack, CardRarity.Rare, 
 
     protected override bool HasEnergyCostX => true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(8M),
         new ExtraDamageVar(3M),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(

@@ -14,8 +14,7 @@ public class IntentStrike() : MonsterHunterCard(2, CardType.Attack, CardRarity.C
         CombatState != null && CombatState.HittableEnemies.Any(e => 
             e.Monster != null && e.Monster.IntendsToAttack);
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(9M),
         new ExtraDamageVar(9M),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(

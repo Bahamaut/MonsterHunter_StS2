@@ -11,14 +11,12 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class HunterForm() : MonsterHunterCard(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<StrengthPower>(),
         HoverTipFactory.FromPower<DexterityPower>(),
     ];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<StrengthPower>(2M),
         new PowerVar<DexterityPower>(2M),
         new PowerVar<HunterFormPower>(2M)

@@ -13,8 +13,7 @@ public class GoForTheHead() : MonsterHunterCard(0, CardType.Attack, CardRarity.C
         CombatState != null && CombatState.HittableEnemies.Any(e =>
             e.Monster != null && e.Monster.IntendsToAttack);
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(3M, ValueProp.Move),
         new PowerVar<VulnerablePower>(1M)
     ];

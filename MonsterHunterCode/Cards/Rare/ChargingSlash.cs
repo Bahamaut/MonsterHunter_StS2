@@ -10,15 +10,13 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class ChargingSlash() : MonsterHunterCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(6M, ValueProp.Move),
         new EnergyVar(1),
         new StringVar("Combo")
     ];
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromCard<ScalingSlash>(IsUpgraded),
         HoverTipFactory.FromCard<PlungingThrust>(IsUpgraded)
     ];

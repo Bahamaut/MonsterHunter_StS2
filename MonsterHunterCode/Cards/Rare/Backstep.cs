@@ -14,14 +14,12 @@ public class Backstep() : MonsterHunterCard(0, CardType.Skill, CardRarity.Rare, 
         CombatState != null && CombatState.HittableEnemies.Any(e =>
             e.Monster != null && e.Monster.IntendsToAttack);
     
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(5M, ValueProp.Move),
         new StringVar("Combo")
     ];
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromCard<LeapingSlash>(IsUpgraded),
         HoverTipFactory.FromCard<PerfectRush>(IsUpgraded)
     ];

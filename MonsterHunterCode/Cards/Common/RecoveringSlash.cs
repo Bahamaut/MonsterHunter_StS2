@@ -10,8 +10,7 @@ public class RecoveringSlash() : MonsterHunterCard(1, CardType.Attack, CardRarit
 {
     protected override HashSet<CardTag> CanonicalTags => [];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9M, ValueProp.Move),
         new CardsVar(1)
     ];

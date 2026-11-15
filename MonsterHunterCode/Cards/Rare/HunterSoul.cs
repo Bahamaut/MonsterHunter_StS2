@@ -9,9 +9,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class HunterSoul() : MonsterHunterCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(1)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [EnergyHoverTip];
 

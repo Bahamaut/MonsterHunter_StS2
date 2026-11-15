@@ -12,8 +12,7 @@ public class ChaosOil() : MonsterHunterCard(1, CardType.Skill, CardRarity.Ancien
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ChaosOilPower>(1M)];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-    [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         CardKeyword.Exhaust,
         CardKeyword.Innate
     ];

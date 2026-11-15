@@ -12,8 +12,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class TheBigFinish() : MonsterHunterCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(8M),
         new ExtraDamageVar(2M),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(

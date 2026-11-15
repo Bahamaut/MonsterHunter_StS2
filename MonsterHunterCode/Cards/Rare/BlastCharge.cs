@@ -13,8 +13,7 @@ namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
 public class BlastCharge() : MonsterHunterCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(12M),
         new ExtraDamageVar(4M),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(

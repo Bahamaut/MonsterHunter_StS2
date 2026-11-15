@@ -12,8 +12,7 @@ public class VulnStrike() : MonsterHunterCard(1, CardType.Attack, CardRarity.Com
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>()];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(8M, ValueProp.Move),
         new PowerVar<VulnerablePower>(1M)
     ];
