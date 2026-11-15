@@ -10,7 +10,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Saves.Runs;
 using MonsterHunter.MonsterHunterCode.Cards.Quest;
 using MonsterHunter.MonsterHunterCode.Relics;
 
@@ -19,22 +18,9 @@ namespace MonsterHunter.MonsterHunterCode.Relics;
 public class HighRankQuestBoard() : MonsterHunterRelic
 {
    public override RelicRarity Rarity =>
-        RelicRarity.Starter;
+        RelicRarity.Ancient;
 
-   private bool _captureQuestComplete;
-
-    [SavedProperty]
-    private bool CaptureQuestComplete
-    {
-        get => _captureQuestComplete;
-        set
-        {
-            AssertMutable();
-            _captureQuestComplete = value;
-        }
-    }
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
+   protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromCard<HighRankCaptureQuest>(),
