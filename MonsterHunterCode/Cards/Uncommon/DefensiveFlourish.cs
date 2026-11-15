@@ -1,36 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
-public class DefensiveFlourish() : MonsterHunterCard(1,
-    CardType.Power, CardRarity.Uncommon,
-    TargetType.Self)
+public class DefensiveFlourish() : MonsterHunterCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(2M, ValueProp.Unpowered)
+        new BlockVar(2M, ValueProp.Unpowered),
+        new PowerVar<DefensiveFlourishPower>(2M)
     ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.Static(StaticHoverTip.Block)
     ];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        DefensiveFlourishPower defensiveFlourishPower = await PowerCmd.Apply<DefensiveFlourishPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Block.BaseValue, this.Owner.Creature, (CardModel) this);
+        await PowerCmd.Apply<DefensiveFlourishPower>(choiceContext, Owner.Creature, 
+            DynamicVars.Power<DefensiveFlourishPower>().BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Block.UpgradeValueBy(1M);
+    protected override void OnUpgrade() => DynamicVars.Power<DefensiveFlourishPower>().UpgradeValueBy(1M);
 }

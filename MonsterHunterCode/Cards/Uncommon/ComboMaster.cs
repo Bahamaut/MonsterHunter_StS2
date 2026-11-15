@@ -1,25 +1,21 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
-public class ComboMaster() : MonsterHunterCard(2,
-    CardType.Power, CardRarity.Uncommon,
-    TargetType.Self)
+public class ComboMaster() : MonsterHunterCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ComboMasterPower>(1M)];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ComboMasterPower defensiveFlourishPower = await PowerCmd.Apply<ComboMasterPower>(choiceContext, this.Owner.Creature, 1M, this.Owner.Creature, (CardModel) this);
+        await PowerCmd.Apply<ComboMasterPower>(choiceContext, Owner.Creature, 
+            DynamicVars.Power<ComboMasterPower>().BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

@@ -9,9 +9,7 @@ using MonsterHunter.MonsterHunterCode.Cards;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
-public class MakeCamp() : MonsterHunterCard(2,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.Self)
+public class MakeCamp() : MonsterHunterCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     public override bool GainsBlock => true;
     
@@ -22,13 +20,12 @@ public class MakeCamp() : MonsterHunterCard(2,
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [EnergyHoverTip];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay cardPlay)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, DynamicVars.Energy.IntValue, Owner.Creature, this);     
+        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, 
+            DynamicVars.Energy.IntValue, Owner.Creature, this);     
     }
 
     protected override void OnUpgrade()

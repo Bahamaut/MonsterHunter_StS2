@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace MonsterHunter.MonsterHunterCode.Powers.Oil;
 
-public class DestroyerOilPower() : MonsterHunterPower
+public class DestroyerOilPower : MonsterHunterPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -17,19 +17,25 @@ public class DestroyerOilPower() : MonsterHunterPower
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public override int DisplayAmount => Math.Max(0, this.Amount - this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed);
+    public override int DisplayAmount => Math.Max(0, Amount - GetInternalData<Data>().AttacksPlayed);
     
-    protected override object InitInternalData() => (object) new DestroyerOilPower.Data();
+    protected override object InitInternalData() => new Data();
     
     public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        if (target.Player is null)
+            return;
+        
         if (target.HasPower<StaminaOilPower>())
         {
             if(target.HasPower<StaminaOilTempDexterityPower>())
             {
-                await PowerCmd.Apply<DexterityPower>( new ThrowingPlayerChoiceContext(), target, -(target._powers.OfType<StaminaOilTempDexterityPower>().FirstOrDefault().Amount), target, (CardModel) null);
+                    await PowerCmd.Apply<DexterityPower>(new ThrowingPlayerChoiceContext(), target,
+                        -target.Player.Creature.Powers.OfType<StaminaOilTempDexterityPower>().First().Amount, 
+                        applier, cardSource);
                 await PowerCmd.Remove<StaminaOilTempDexterityPower>(target);
             }
+            
             await PowerCmd.Remove<StaminaOilPower>(target);
         }
         else if (target.HasPower<AffinityOilPower>())
@@ -37,8 +43,8 @@ public class DestroyerOilPower() : MonsterHunterPower
             if (target.HasPower<AffinityOilTempStrengthPower>())
             {
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), target,
-                    -(target._powers.OfType<AffinityOilTempStrengthPower>().FirstOrDefault().Amount), target,
-                    (CardModel)null);
+                    -target._powers.OfType<AffinityOilTempStrengthPower>().First().Amount, 
+                    applier, cardSource);
                 await PowerCmd.Remove<AffinityOilTempStrengthPower>(target);
             }
 
@@ -54,43 +60,36 @@ public class DestroyerOilPower() : MonsterHunterPower
         }
     }
     
-    public override async Task AfterDamageGiven(
-        PlayerChoiceContext choiceContext,
-        Creature? dealer,
-        DamageResult result,
-        ValueProp props,
-        Creature target,
-        CardModel? cardSource)
+    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, 
+        DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
-        if (dealer == null || dealer != this.Owner && dealer.PetOwner?.Creature != this.Owner ||
-            !props.IsPoweredAttack() || result.TotalDamage <= 0 || this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed >= this.Amount)
+        if (dealer == null || dealer != Owner && dealer.PetOwner?.Creature != Owner ||
+            !props.IsPoweredAttack() || result.TotalDamage <= 0 || GetInternalData<Data>().AttacksPlayed >= Amount)
             return;
         
-        WeakPower weakPower = await PowerCmd.Apply<WeakPower>(choiceContext, target, this.Amount, dealer, (CardModel) cardSource);
+        await PowerCmd.Apply<WeakPower>(choiceContext, target, Amount, dealer, cardSource);
         SetAttacksPlayed(1);
     }
     
-    public override Task AfterSideTurnStart(
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
+    public override Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
-        if (!participants.Contains<Creature>(this.Owner))
+        if (!participants.Contains(Owner))
             return Task.CompletedTask;
-        this.SetAttacksPlayed(0);
-        this.InvokeDisplayAmountChanged();
+        SetAttacksPlayed(0);
+        InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }
-    
-    public void SetAttacksPlayed(int value)
+
+    private void SetAttacksPlayed(int value)
     {
-        this.GetInternalData<DestroyerOilPower.Data>().attacksPlayed = value;
-        this.InvokeDisplayAmountChanged();
+        GetInternalData<Data>().AttacksPlayed = value;
+        InvokeDisplayAmountChanged();
     }
 
-    public class Data
+    private class Data
     {
-        public int attacksPlayed;
+        public int AttacksPlayed;
     }
 
     

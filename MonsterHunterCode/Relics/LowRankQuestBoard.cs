@@ -1,39 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Saves.Runs;
-using MonsterHunter.MonsterHunterCode.Cards;
-using MonsterHunter.MonsterHunterCode.Cards.Basic;
-using MonsterHunter.MonsterHunterCode.Cards.Oil;
 using MonsterHunter.MonsterHunterCode.Cards.Quest;
 
 namespace MonsterHunter.MonsterHunterCode.Relics;
 
 
-public class LowRankQuestBoard() : MonsterHunterRelic
+public class LowRankQuestBoard : MonsterHunterRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
     
     public override RelicModel GetUpgradeReplacement() => ModelDb.Relic<HighRankQuestBoard>();
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new CardsVar(3)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromCard<LowRankCaptureQuest>(),
@@ -41,32 +26,25 @@ public class LowRankQuestBoard() : MonsterHunterRelic
         HoverTipFactory.FromCard<LowRankGatheringQuest>()
     ];
 
-    public static readonly IReadOnlyList<IChoosable> Quests =
-        new ReadOnlyCollection<IChoosable>(
-        [
+    private static IReadOnlyList<IChoosable> Quests => [
             ModelDb.Card<LowRankCaptureQuest>(),
             ModelDb.Card<LowRankSlayQuest>(),
             ModelDb.Card<LowRankGatheringQuest>(),
-        ]);
+        ];
 
-    public override async Task BeforeHandDraw(
-        Player player,
-        PlayerChoiceContext choiceContext,
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext,
         ICombatState combatState)
     {
-        if (player != this.Owner || this.Owner.PlayerCombatState.TurnNumber !=1)
+        if (Owner.PlayerCombatState != null && (player != Owner || Owner.PlayerCombatState.TurnNumber !=1))
             return;
-        this.Flash();
-
-        CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
-            (IReadOnlyList<CardModel>)Quests.Select<IChoosable, CardModel>((Func<IChoosable, CardModel>)(
-                c =>
-                {
-                    CardModel card = combatState.CreateCard((CardModel)c, player);
-                    return card;
-                })).ToList(), this.Owner);
+        
+        Flash();
+        var cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
+            Quests.Select((Func<IChoosable, CardModel>)(
+                c => combatState.CreateCard((CardModel)c, player))).ToList(), Owner);
         if (cardModel == null)
             return;
+        
         await ((IChoosable)cardModel).OnChosen(choiceContext);
     }
 

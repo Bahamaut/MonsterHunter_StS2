@@ -1,17 +1,12 @@
-﻿using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
-public class HealthPotion() : MonsterHunterCard(1,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.Self)
+public class HealthPotion() : MonsterHunterCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [ 
         new BlockVar(5M, ValueProp.Move),
@@ -19,16 +14,12 @@ public class HealthPotion() : MonsterHunterCard(1,
         new StringVar("Consumable")
     ];
     
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        CardKeyword.Exhaust
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        await CreatureCmd.Heal(Owner.Creature, this.DynamicVars.Heal.BaseValue);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue);
     }
 
     protected override void OnUpgrade()

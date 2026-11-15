@@ -20,24 +20,21 @@ public class HighRankQuestBoard() : MonsterHunterRelic
 {
    public override RelicRarity Rarity =>
         RelicRarity.Starter;
-    
-    public bool _captureQuestComplete;
+
+   private bool _captureQuestComplete;
 
     [SavedProperty]
-    public bool CaptureQuestComplete
+    private bool CaptureQuestComplete
     {
-        get => this._captureQuestComplete;
+        get => _captureQuestComplete;
         set
         {
-            this.AssertMutable();
-            this._captureQuestComplete = value;
+            AssertMutable();
+            _captureQuestComplete = value;
         }
     }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new CardsVar(3)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromCard<HighRankCaptureQuest>(),
@@ -45,64 +42,30 @@ public class HighRankQuestBoard() : MonsterHunterRelic
         HoverTipFactory.FromCard<HighRankGatheringQuest>()
     ];
 
-    public static readonly IReadOnlyList<HighRankQuestBoard.IChoosable> Quests =
-        new ReadOnlyCollection<HighRankQuestBoard.IChoosable>(
-        [
+    private static IReadOnlyList<IChoosable> Quests => [
             ModelDb.Card<HighRankCaptureQuest>(),
             ModelDb.Card<HighRankSlayQuest>(),
             ModelDb.Card<HighRankGatheringQuest>(),
-        ]);
+        ];
 
-    public override async Task BeforeHandDraw(
-        Player player,
-        PlayerChoiceContext choiceContext,
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext,
         ICombatState combatState)
     {
-        if (player != this.Owner || this.Owner.PlayerCombatState.TurnNumber !=1)
+        if (Owner.PlayerCombatState != null && (player != Owner || Owner.PlayerCombatState.TurnNumber !=1))
             return;
-        this.Flash();
-
-        CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
-            (IReadOnlyList<CardModel>)Quests.Select<HighRankQuestBoard.IChoosable, CardModel>((Func<HighRankQuestBoard.IChoosable, CardModel>)(
-                c =>
-                {
-                    CardModel card = combatState.CreateCard((CardModel)c, player);
-                    return card;
-                })).ToList(), this.Owner);
+        
+        Flash();
+        var cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
+            Quests.Select((Func<IChoosable, CardModel>)(
+                c => combatState.CreateCard((CardModel)c, player))).ToList(), Owner);
         if (cardModel == null)
             return;
-        await ((LowRankQuestBoard.IChoosable)cardModel).OnChosen(choiceContext);
+        
+        await ((IChoosable)cardModel).OnChosen(choiceContext);
     }
 
     public interface IChoosable
     {
         Task OnChosen(PlayerChoiceContext choiceContext);
-    }
-    
-    public override bool TryModifyCardRewardOptionsLate(
-        Player player,
-        List<CardCreationResult> cardRewards,
-        CardCreationOptions options)
-    {
-        if (!(this.Owner.RunState.CurrentRoom is CombatRoom) || player != this.Owner || !this.CaptureQuestComplete)
-            return false;
-        var rewardToUpgrade = cardRewards.Where(cr => !cr.Card.IsUpgraded);
-
-        if (rewardToUpgrade == null)
-            return false;
-
-        foreach (var reward in rewardToUpgrade)
-        {
-            CardModel card1 = reward.Card;
-            if (card1.IsUpgradable)
-            {
-                CardModel card2 = this.Owner.RunState.CloneCard(card1);
-                CardCmd.Upgrade(card2);
-                reward.ModifyCard(card2, (RelicModel)this);
-            }
-        }
-
-        CaptureQuestComplete = false;
-        return true;
     }
 }

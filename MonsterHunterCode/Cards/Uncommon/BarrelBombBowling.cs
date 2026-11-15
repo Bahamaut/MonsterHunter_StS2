@@ -2,29 +2,23 @@
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.TestSupport;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Commands;
 using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
-public class BarrelBombBowling() : MonsterHunterCard(2,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.RandomEnemy)
+public class BarrelBombBowling() : MonsterHunterCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.RandomEnemy)
 {
-    private readonly Godot.Color _vfxTint = new Godot.Color("3D9191");
+    private readonly Color _vfxTint = new ("3D9191");
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<BlastPower>(3M),
@@ -35,34 +29,37 @@ public class BarrelBombBowling() : MonsterHunterCard(2,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        Vector2 lastPos = Vector2.Zero;
-        for (int i = 0; i < this.DynamicVars.Repeat.IntValue; ++i)
+        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        var lastPos = Vector2.Zero;
+        if (CombatState is null || NCombatRoom.Instance is null)
+            return;
+        
+        for (var i = 0; i < DynamicVars.Repeat.IntValue; ++i)
         {
-            Creature enemy = this.Owner.RunState.Rng.CombatTargets.NextItem<Creature>((IEnumerable<Creature>) this.CombatState.HittableEnemies);
+            var enemy = Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
             if (enemy != null)
             {
                 if (TestMode.IsOff)
                 {
                     if (i == 0)
-                        lastPos = NCombatRoom.Instance.GetCreatureNode(this.Owner.Creature).VfxSpawnPosition;
-                    NCreature targetNode = NCombatRoom.Instance.GetCreatureNode(enemy);
+                        lastPos = NCombatRoom.Instance.GetCreatureNode(Owner.Creature).VfxSpawnPosition;
+                    var targetNode = NCombatRoom.Instance.GetCreatureNode(enemy);
                     if (targetNode != null)
                     {
-                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node) NItemThrowVfx.Create(lastPos, targetNode.GetBottomOfHitbox(), ModelDb.Potion<PoisonPotion>().Image));
+                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Node) NItemThrowVfx.Create(lastPos, targetNode.GetBottomOfHitbox(), ModelDb.Potion<PoisonPotion>().Image));
                         lastPos = targetNode.VfxSpawnPosition;
                         await Cmd.Wait(0.5f);
-                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node) NSplashVfx.Create(targetNode.VfxSpawnPosition, this._vfxTint));
-                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node) NLiquidOverlayVfx.Create(enemy, this._vfxTint));
-                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node) NGaseousImpactVfx.Create(targetNode.VfxSpawnPosition, this._vfxTint));
+                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Node) NSplashVfx.Create(targetNode.VfxSpawnPosition, _vfxTint));
+                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Node) NLiquidOverlayVfx.Create(enemy, _vfxTint));
+                        NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Node) NGaseousImpactVfx.Create(targetNode.VfxSpawnPosition, _vfxTint));
                     }
-                    targetNode = (NCreature) null;
+                    targetNode = null;
                 }
-                await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),enemy,this.DynamicVars.Power<BlastPower>().BaseValue, this.Owner.Creature,null);
+                await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),enemy,DynamicVars.Power<BlastPower>().BaseValue, Owner.Creature,null);
             }
-            enemy = (Creature) null;
+            enemy = null;
         }
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Repeat.UpgradeValueBy(1M);
+    protected override void OnUpgrade() => DynamicVars.Repeat.UpgradeValueBy(1M);
 }
