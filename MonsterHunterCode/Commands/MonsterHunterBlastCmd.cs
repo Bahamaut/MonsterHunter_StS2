@@ -1,5 +1,4 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -21,10 +20,10 @@ public class MonsterHunterBlastCmd
         while (target.HasPower<BlastPower>() && target.Powers.First(x => x is BlastPower).Amount >=
                target.Powers.First(x => x is BlastBlightPower).Amount)
         {
-            IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
-                (PlayerChoiceContext)new ThrowingPlayerChoiceContext(), target,
+            await CreatureCmd.Damage(
+                new ThrowingPlayerChoiceContext(), target,
                 target.Powers.First(x => x is BlastBlightPower).Amount,
-                ValueProp.Unblockable | ValueProp.Unpowered, (CardModel)null, (CardPlay)null);
+                ValueProp.Unblockable | ValueProp.Unpowered, null, null);
             
             if(target.IsDead)
                 return;

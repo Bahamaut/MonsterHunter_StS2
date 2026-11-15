@@ -10,9 +10,7 @@ using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
-public class WideRange() : MonsterHunterCard(2,
-    CardType.Power, CardRarity.Rare,
-    TargetType.AllAllies)
+public class WideRange() : MonsterHunterCard(2, CardType.Power, CardRarity.Rare, TargetType.AllAllies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     
@@ -22,13 +20,12 @@ public class WideRange() : MonsterHunterCard(2,
     
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(this.Owner.Creature, "PowerUp", this.Owner.Character.PowerUpAnimDelay);
-        WideRangePower wideRangePower = await PowerCmd.Apply<WideRangePower>(choiceContext, this.Owner.Creature, 1M, this.Owner.Creature, this);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "PowerUp", Owner.Character.PowerUpAnimDelay);
+        await PowerCmd.Apply<WideRangePower>(choiceContext, Owner.Creature, 
+            1M, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

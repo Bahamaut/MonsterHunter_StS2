@@ -1,20 +1,18 @@
-﻿using BaseLib.Utils;
+﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MonsterHunter.MonsterHunterCode.Cards;
 using MonsterHunter.MonsterHunterCode.Powers.Quest;
 using MonsterHunter.MonsterHunterCode.Relics;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Quest;
 
 [Pool(typeof(TokenCardPool))]
-public class LowRankCaptureQuest() : MonsterHunterCard(-1,
-    CardType.None, CardRarity.Basic,
-    TargetType.Self), LowRankQuestBoard.IChoosable
+public class LowRankCaptureQuest() 
+    : MonsterHunterCard(-1, CardType.None, CardRarity.None, TargetType.Self), LowRankQuestBoard.IChoosable
 {
     public override int MaxUpgradeLevel => 0;
 
@@ -24,7 +22,7 @@ public class LowRankCaptureQuest() : MonsterHunterCard(-1,
 
     public async Task OnChosen(PlayerChoiceContext choiceContext)
     {
-        LowRankCaptureQuestPower lowRankCaptureQuestPower = await PowerCmd.Apply<LowRankCaptureQuestPower>(choiceContext, this.Owner.Creature,
-            this.DynamicVars[nameof(LowRankCaptureQuestPower)].BaseValue, this.Owner.Creature, (CardModel)this);
+        await PowerCmd.Apply<LowRankCaptureQuestPower>(choiceContext, Owner.Creature,
+            DynamicVars.Power<LowRankCaptureQuestPower>().BaseValue, Owner.Creature, this);
     }
 }

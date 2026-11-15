@@ -20,7 +20,7 @@ public class MonsterHunter : PlaceholderCharacterModel
 
     public static readonly Color Color = new("#3D9191");
 
-    public override Color NameColor => Color;
+    public override Color NameColor => new("#3D9191");
     public override CharacterGender Gender => CharacterGender.Neutral;
     public override int StartingHp => 70;
 
@@ -65,4 +65,6 @@ public class MonsterHunter : PlaceholderCharacterModel
     public override string CustomCharacterSelectIconPath => "char_select_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectLockedIconPath => "char_select_char_name_locked.png".CharacterUiPath();
     public override string CustomMapMarkerPath => "map_marker_char_name.png".CharacterUiPath();
+    
+    public override Godot.Color MapDrawingColor => new Godot.Color("3D9191");
 }

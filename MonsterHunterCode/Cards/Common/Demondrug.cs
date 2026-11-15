@@ -10,9 +10,7 @@ using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Common;
 
-public class Demondrug() : MonsterHunterCard(0,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+public class Demondrug() : MonsterHunterCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -22,14 +20,12 @@ public class Demondrug() : MonsterHunterCard(0,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        DemondrugPower demondrugPower = await PowerCmd.Apply<DemondrugPower>(choiceContext, this.Owner.Creature,
-            this.DynamicVars.Strength.BaseValue, this.Owner.Creature, (CardModel)this);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await PowerCmd.Apply<DemondrugPower>(choiceContext, Owner.Creature,
+            DynamicVars.Strength.BaseValue, Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Strength.UpgradeValueBy(2M);
+    protected override void OnUpgrade() => DynamicVars.Strength.UpgradeValueBy(2M);
 }

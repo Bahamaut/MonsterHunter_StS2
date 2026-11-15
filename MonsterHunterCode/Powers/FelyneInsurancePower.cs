@@ -1,21 +1,17 @@
 ﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.Models;
-using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Powers;
 
   
-public class FelyneInsurancePower() : MonsterHunterPower
+public class FelyneInsurancePower : MonsterHunterPower
 {
     private bool _preventedDeath;
     
-    public override PowerType Type =>
-        PowerType.Buff;
+    public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType =>
-        PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Single;
 
     public override bool ShouldDie(Creature creature)
     {
@@ -31,10 +27,10 @@ public class FelyneInsurancePower() : MonsterHunterPower
         if (_preventedDeath)
         {
             _preventedDeath = false;
-            int num = (int)(creature.MaxHp * 0.30m);
+            var num = (int)(creature.MaxHp * 0.30m);
             await CreatureCmd.SetCurrentHp(creature, num);
-            await PowerCmd.Remove((PowerModel)(object)this);
-            ((PowerModel)this).Flash();
+            await PowerCmd.Remove(this);
+            Flash();
         }
     }
 }

@@ -4,8 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MonsterHunter.MonsterHunterCode.Cards;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
@@ -17,22 +15,18 @@ public class DashJuice() : MonsterHunterCard(0, CardType.Skill, CardRarity.Rare,
         new StringVar("Consumable")
     ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        CardKeyword.Exhaust
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        EnergyHoverTip
-    ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [EnergyHoverTip];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (LocalContext.IsMe(this.Owner))
-            VfxCmd.PlayFullScreenInCombat("vfx/vfx_adrenaline", this.Owner.Creature);
-        await PlayerCmd.GainEnergy((Decimal) this.DynamicVars.Energy.IntValue, this.Owner);
-        IEnumerable<CardModel> cardModels = await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
+        if (LocalContext.IsMe(Owner))
+            VfxCmd.PlayFullScreenInCombat("vfx/vfx_adrenaline", Owner.Creature);
+        
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
     }
 
-    protected override void OnUpgrade() => this.DynamicVars.Energy.UpgradeValueBy(1M);
+    protected override void OnUpgrade() => DynamicVars.Energy.UpgradeValueBy(1M);
 }

@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace MonsterHunter.MonsterHunterCode.Powers.Oil;
 
 
-public class MindsEyeOilPower() : MonsterHunterPower
+public class MindsEyeOilPower : MonsterHunterPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -18,19 +18,25 @@ public class MindsEyeOilPower() : MonsterHunterPower
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public override int DisplayAmount => Math.Max(0, this.Amount - this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed);
+    public override int DisplayAmount => Math.Max(0, Amount - GetInternalData<Data>().AttacksPlayed);
     
-    protected override object InitInternalData() => (object) new MindsEyeOilPower.Data();
+    protected override object InitInternalData() => new Data();
     
     public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
     {
+        if (target.Player is null)
+            return;
+        
         if (target.HasPower<StaminaOilPower>())
         {
             if(target.HasPower<StaminaOilTempDexterityPower>())
             {
-                await PowerCmd.Apply<DexterityPower>( new ThrowingPlayerChoiceContext(), target, -(target._powers.OfType<StaminaOilTempDexterityPower>().FirstOrDefault().Amount), target, (CardModel) null);
+                await PowerCmd.Apply<DexterityPower>(new ThrowingPlayerChoiceContext(), target, 
+                    -target.Player.Creature.Powers.OfType<StaminaOilTempDexterityPower>().First().Amount, 
+                    applier,  cardSource);
                 await PowerCmd.Remove<StaminaOilTempDexterityPower>(target);
             }
+            
             await PowerCmd.Remove<StaminaOilPower>(target);
         }
         else if (target.HasPower<AffinityOilPower>())
@@ -38,8 +44,8 @@ public class MindsEyeOilPower() : MonsterHunterPower
             if (target.HasPower<AffinityOilTempStrengthPower>())
             {
                 await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), target,
-                    -(target._powers.OfType<AffinityOilTempStrengthPower>().FirstOrDefault().Amount), target,
-                    (CardModel)null);
+                    -target.Player.Creature.Powers.OfType<AffinityOilTempStrengthPower>().First().Amount,
+                    applier, cardSource);
                 await PowerCmd.Remove<AffinityOilTempStrengthPower>(target);
             }
 
@@ -55,42 +61,35 @@ public class MindsEyeOilPower() : MonsterHunterPower
         }
     }
     
-    public override async Task AfterDamageGiven(
-        PlayerChoiceContext choiceContext,
-        Creature? dealer,
-        DamageResult result,
-        ValueProp props,
-        Creature target,
-        CardModel? cardSource)
+    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer,
+        DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
-        if (dealer == null || dealer != this.Owner && dealer.PetOwner?.Creature != this.Owner ||
-            !props.IsPoweredAttack() || result.TotalDamage <= 0 || this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed >= this.Amount)
+        if (dealer == null || dealer !=  Owner && dealer.PetOwner?.Creature != Owner ||
+            !props.IsPoweredAttack() || result.TotalDamage <= 0 || GetInternalData<Data>().AttacksPlayed >= Amount)
             return;
         
-        VulnerablePower vulnerablePower = await PowerCmd.Apply<VulnerablePower>(choiceContext, target, this.Amount, dealer, (CardModel) cardSource);
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, target, Amount, dealer, cardSource);
         SetAttacksPlayed(1);
     }
     
-    public override Task AfterSideTurnStart(
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
+    public override Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
-        if (!participants.Contains<Creature>(this.Owner))
+        if (!participants.Contains(Owner))
             return Task.CompletedTask;
-        this.SetAttacksPlayed(0);
-        this.InvokeDisplayAmountChanged();
+        SetAttacksPlayed(0);
+        InvokeDisplayAmountChanged();
         return Task.CompletedTask;
     }
-    
-    public void SetAttacksPlayed(int value)
+
+    private void SetAttacksPlayed(int value)
     {
-        this.GetInternalData<MindsEyeOilPower.Data>().attacksPlayed = value;
-        this.InvokeDisplayAmountChanged();
+        GetInternalData<Data>().AttacksPlayed = value;
+        InvokeDisplayAmountChanged();
     }
 
-    public class Data
+    private class Data
     {
-        public int attacksPlayed;
+        public int AttacksPlayed;
     }
 }

@@ -7,14 +7,13 @@ using MonsterHunter.MonsterHunterCode.Cards.Oil;
 
 namespace MonsterHunter.MonsterHunterCode.Powers.Oil;
 
-public class AffinityOilTempStrengthPower() : TemporaryStrengthPower
+public class AffinityOilTempStrengthPower : TemporaryStrengthPower
 {
-    public override AbstractModel OriginModel => (AbstractModel) ModelDb.Card<AffinityOil>();
+    public override AbstractModel OriginModel => ModelDb.Card<AffinityOil>();
     
-    public override async Task AfterSideTurnEnd(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
         IEnumerable<Creature> participants)
     {
+        await Task.CompletedTask;
     }
 }

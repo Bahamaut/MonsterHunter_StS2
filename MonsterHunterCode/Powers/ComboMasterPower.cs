@@ -2,38 +2,30 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
-using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Powers;
 
-public class ComboMasterPower() : MonsterHunterPower
+public class ComboMasterPower : MonsterHunterPower
 {
-    public override PowerType Type =>
-        PowerType.Buff;
+    public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType =>
-        PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Single;
 
-    public override async Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
-        ICombatState combatState)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side,
+        IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-
-        if (!participants.Contains<Creature>(this.Owner))
+        if (!participants.Contains(Owner) || Owner.Player is null)
             return;
-        foreach (CardModel card in PileType.Draw.GetPile(this.Owner.Player).Cards
-                     .Where<CardModel>((Func<CardModel, bool>)(c => c.DynamicVars.ContainsKey("Combo")))
-                     .ToList<CardModel>().UnstableShuffle<CardModel>(this.Owner.Player.RunState.Rng.CombatCardSelection)
-                     .Take<CardModel>(1))
+        foreach (var card in PileType.Draw.GetPile(Owner.Player).Cards
+                     .Where((c => c.DynamicVars.ContainsKey("Combo")))
+                     .ToList()
+                     .UnstableShuffle(Owner.Player.RunState.Rng.CombatCardSelection)
+                     .Take(1))
         {
-            CardPileAddResult cardPileAddResult = await CardPileCmd.Add(card, PileType.Hand);
+            await CardPileCmd.Add(card, PileType.Hand);
             if (card.IsUpgradable)
                 CardCmd.Upgrade(card);
         }

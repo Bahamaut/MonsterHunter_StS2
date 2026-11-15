@@ -3,21 +3,16 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using MonsterHunter.MonsterHunterCode.Cards;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Uncommon;
 
-public class Rampage() : MonsterHunterCard(1,
-    CardType.Attack, CardRarity.Uncommon,
-    TargetType.AnyEnemy)
+public class Rampage() : MonsterHunterCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    private const string _increaseKey = "Increase";
-
     private decimal _extraDamageFromPlays;
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(10m, ValueProp.Move),
-        new DynamicVar("Increase", 5m)
+        new ("Increase", 5m)
     ];
 
     /// <summary>
@@ -35,8 +30,10 @@ public class Rampage() : MonsterHunterCard(1,
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this, cardPlay)
+            .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         DynamicVars.Damage.BaseValue += DynamicVars["Increase"].BaseValue;
@@ -49,8 +46,5 @@ public class Rampage() : MonsterHunterCard(1,
         DynamicVars.Damage.BaseValue += ExtraDamageFromPlays;
     }
 
-    protected override void OnUpgrade()
-    {
-        DynamicVars["Increase"].UpgradeValueBy(5m);
-    }
+    protected override void OnUpgrade() => DynamicVars["Increase"].UpgradeValueBy(5m);
 }
