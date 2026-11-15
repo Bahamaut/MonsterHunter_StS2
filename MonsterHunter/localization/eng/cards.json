@@ -1,5 +1,5 @@
 {
-  "MONSTERHUNTER-ADAPTABILITY.description": "Each time you block all damage, gain 1 [gold]Strength[/gold]. Every time you take unblocked damage gain 1 [gold]Dexterity[/gold].",
+  "MONSTERHUNTER-ADAPTABILITY.description": "Each time you block all damage, gain {StrengthPower:diff()} [gold]Strength[/gold]. Every time you take unblocked damage gain {DexterityPower:diff()} [gold]Dexterity[/gold].",
   "MONSTERHUNTER-ADAPTABILITY.title": "Adaptability",
   "MONSTERHUNTER-ADRENALINE_RUSH.description": "Attacks deal half damage and hit twice as many times.",
   "MONSTERHUNTER-ADRENALINE_RUSH.title": "Adrenaline Rush",
