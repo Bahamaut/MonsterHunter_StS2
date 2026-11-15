@@ -13,18 +13,18 @@ public class HunterPact() : MonsterHunterCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(3),
-        new DynamicVar("Power", 1M)
+        new CardsVar(2)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int amount = this.DynamicVars["Power"].IntValue;
-        WeakPower weakPower = await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
-        VulnerablePower vulnerablePower = await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
-        IEnumerable<CardModel> cardModels = await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
+        var amount = CombatState != null && CombatState.HittableEnemies.Any(e =>
+            e.Monster != null && e.Monster.IntendsToAttack)
+            ? DynamicVars.Cards.IntValue + 1
+            : DynamicVars.Cards.IntValue;
+        IEnumerable<CardModel> cardModels = await CardPileCmd.Draw(choiceContext, amount, this.Owner);
     }
 
     protected override void OnUpgrade() => DynamicVars.Cards.UpgradeValueBy(1M);

@@ -16,7 +16,7 @@ using MonsterHunter.MonsterHunterCode.Cards;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Rare;
 
-public class ImprovementThroughIteration() : MonsterHunterCard(2,
+public class SteadyImprovement() : MonsterHunterCard(2,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {

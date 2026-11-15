@@ -45,8 +45,8 @@ public class HighRankQuestBoard() : MonsterHunterRelic
         HoverTipFactory.FromCard<HighRankGatheringQuest>()
     ];
 
-    public static readonly IReadOnlyList<LowRankQuestBoard.IChoosable> Quests =
-        new ReadOnlyCollection<LowRankQuestBoard.IChoosable>(
+    public static readonly IReadOnlyList<HighRankQuestBoard.IChoosable> Quests =
+        new ReadOnlyCollection<HighRankQuestBoard.IChoosable>(
         [
             ModelDb.Card<HighRankCaptureQuest>(),
             ModelDb.Card<HighRankSlayQuest>(),
@@ -63,7 +63,7 @@ public class HighRankQuestBoard() : MonsterHunterRelic
         this.Flash();
 
         CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext,
-            (IReadOnlyList<CardModel>)Quests.Select<LowRankQuestBoard.IChoosable, CardModel>((Func<LowRankQuestBoard.IChoosable, CardModel>)(
+            (IReadOnlyList<CardModel>)Quests.Select<HighRankQuestBoard.IChoosable, CardModel>((Func<HighRankQuestBoard.IChoosable, CardModel>)(
                 c =>
                 {
                     CardModel card = combatState.CreateCard((CardModel)c, player);

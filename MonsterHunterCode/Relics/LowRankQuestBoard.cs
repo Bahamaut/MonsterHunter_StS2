@@ -28,18 +28,7 @@ public class LowRankQuestBoard() : MonsterHunterRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
     
-    public bool _captureQuestComplete;
-
-    [SavedProperty]
-    public bool CaptureQuestComplete
-    {
-        get => this._captureQuestComplete;
-        set
-        {
-            this.AssertMutable();
-            this._captureQuestComplete = value;
-        }
-    }
+    public override RelicModel GetUpgradeReplacement() => ModelDb.Relic<HighRankQuestBoard>();
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -84,28 +73,5 @@ public class LowRankQuestBoard() : MonsterHunterRelic
     public interface IChoosable
     {
         Task OnChosen(PlayerChoiceContext choiceContext);
-    }
-    
-    public override bool TryModifyCardRewardOptionsLate(
-        Player player,
-        List<CardCreationResult> cardRewards,
-        CardCreationOptions options)
-    {
-        if (!(this.Owner.RunState.CurrentRoom is CombatRoom) || player != this.Owner || !this.CaptureQuestComplete)
-            return false;
-        var rewardToUpgrade = cardRewards.FirstOrDefault(cr => !cr.Card.IsUpgraded);
-
-        if (rewardToUpgrade == null)
-            return false;
-        
-        CardModel card1 = rewardToUpgrade.Card;
-        if (card1.IsUpgradable)
-        {
-            CardModel card2 = this.Owner.RunState.CloneCard(card1);
-            CardCmd.Upgrade(card2);
-            rewardToUpgrade.ModifyCard(card2, (RelicModel) this);
-        }
-        CaptureQuestComplete = false;
-        return true;
     }
 }

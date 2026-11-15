@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using BaseLib.Common.Rewards;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -23,7 +24,7 @@ public class LowRankCaptureQuestPower() : MonsterHunterPower
     public override PowerStackType StackType =>
         PowerStackType.Single;
     
-    public bool _tookDamageThisCombat;
+    private bool _tookDamageThisCombat;
     
     [SavedProperty]
     public bool TookDamageThisCombat
@@ -38,7 +39,7 @@ public class LowRankCaptureQuestPower() : MonsterHunterPower
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        this.TookDamageThisCombat = false;
+        TookDamageThisCombat = false;
         return Task.CompletedTask;
     }
 
@@ -52,37 +53,16 @@ public class LowRankCaptureQuestPower() : MonsterHunterPower
     {
         if (target != this.Owner || result.UnblockedDamage <= 0 || props.HasFlag((Enum) ValueProp.Unblockable))
             return Task.CompletedTask;
-        this.TookDamageThisCombat = true;
+        TookDamageThisCombat = true;
         return Task.CompletedTask;
-    }
-
-    public override bool TryModifyCardRewardOptionsLate(
-        Player player,
-        List<CardCreationResult> cardRewards,
-        CardCreationOptions options)
-    {
-        if (player.Creature != this.Owner || this.TookDamageThisCombat)
-            return false;
-        foreach (CardCreationResult cardReward in cardRewards)
-        {
-            CardModel card1 = cardReward.Card;
-            if (card1.IsUpgradable)
-            {
-                CardModel card2 = this.Owner.CombatState.CloneCard(card1);
-                CardCmd.Upgrade(card2);
-                cardReward.ModifyCard(card2);
-            }
-        }
-        return true;
     }
     
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        if(TookDamageThisCombat)
+        if(TookDamageThisCombat || Owner.Player == null)
             return Task.CompletedTask;
 
-        if (Owner.Player._relics.Any(r => r is LowRankQuestBoard))
-           Owner.Player._relics.OfType<LowRankQuestBoard>().FirstOrDefault().CaptureQuestComplete = true;
+        room.AddExtraReward(Owner.Player, new RandomCardUpgradeReward(Owner.Player));
         return Task.CompletedTask;
     }
 }

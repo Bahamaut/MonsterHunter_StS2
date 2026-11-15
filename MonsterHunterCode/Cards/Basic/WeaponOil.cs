@@ -1,16 +1,20 @@
-﻿using MegaCrit.Sts2.Core.Entities.Cards;
+﻿using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MonsterHunter.MonsterHunterCode.Cards.Ancient;
 using MonsterHunter.MonsterHunterCode.Cards.Oil;
 using MonsterHunter.MonsterHunterCode.Commands;
 using MonsterHunter.MonsterHunterCode.Powers.Oil;
 
 namespace MonsterHunter.MonsterHunterCode.Cards.Basic;
 
-public class WeaponOil() : MonsterHunterCard(0, CardType.Skill, CardRarity.Basic, TargetType.Self)
+public class WeaponOil() : MonsterHunterCard(0, CardType.Skill, CardRarity.Basic, TargetType.Self), ITranscendenceCard
 {
+    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<ChaosOil>();
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

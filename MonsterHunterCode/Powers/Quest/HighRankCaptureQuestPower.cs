@@ -56,33 +56,12 @@ public class HighRankCaptureQuestPower() : MonsterHunterPower
         return Task.CompletedTask;
     }
 
-    public override bool TryModifyCardRewardOptionsLate(
-        Player player,
-        List<CardCreationResult> cardRewards,
-        CardCreationOptions options)
-    {
-        if (player.Creature != this.Owner || this.TookDamageThisCombat)
-            return false;
-        foreach (CardCreationResult cardReward in cardRewards)
-        {
-            CardModel card1 = cardReward.Card;
-            if (card1.IsUpgradable)
-            {
-                CardModel card2 = this.Owner.CombatState.CloneCard(card1);
-                CardCmd.Upgrade(card2);
-                cardReward.ModifyCard(card2);
-            }
-        }
-        return true;
-    }
-    
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        if(TookDamageThisCombat)
+        if(TookDamageThisCombat || Owner.Player == null)
             return Task.CompletedTask;
 
-        if (Owner.Player._relics.Any(r => r is HighRankQuestBoard))
-           Owner.Player._relics.OfType<HighRankQuestBoard>().FirstOrDefault().CaptureQuestComplete = true;
+        room.AddExtraReward(Owner.Player, new CardUpgradeReward(Owner.Player));
         return Task.CompletedTask;
     }
 }

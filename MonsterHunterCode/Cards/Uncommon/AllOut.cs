@@ -11,9 +11,13 @@ public class AllOut() : MonsterHunterCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(2),
-        new DynamicVar("Power", 1M)
+    protected override bool ShouldGlowGoldInternal =>
+        CombatState != null && CombatState.HittableEnemies.Any(e =>
+            e.Monster != null && e.Monster.IntendsToAttack);
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new EnergyVar(1)
     ];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [EnergyHoverTip];
@@ -22,10 +26,11 @@ public class AllOut() : MonsterHunterCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay cardPlay)
     {
-        int amount = this.DynamicVars["Power"].IntValue;
-        WeakPower weakPower = await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
-        VulnerablePower vulnerablePower = await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
-        await PlayerCmd.GainEnergy(this.DynamicVars.Energy.BaseValue, this.Owner);
+        var amount = CombatState != null && CombatState.HittableEnemies.Any(e =>
+            e.Monster != null && e.Monster.IntendsToAttack)
+            ? DynamicVars.Energy.IntValue + 1
+            : DynamicVars.Energy.IntValue;
+        await PlayerCmd.GainEnergy(amount, Owner);
     }
 
     protected override void OnUpgrade() => this.DynamicVars.Energy.UpgradeValueBy(1M);
