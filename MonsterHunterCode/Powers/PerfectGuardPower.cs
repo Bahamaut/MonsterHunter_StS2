@@ -2,47 +2,36 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
-using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Powers;
 
-public class PerfectGuardPower() : MonsterHunterPower
+public class PerfectGuardPower : MonsterHunterPower
 {
-    public override PowerType Type =>
-        PowerType.Buff;
+    public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType =>
-        PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Single;
 
     public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
     {
         modifiedCost = originalCost;
-        if (card.Owner.Creature != ((PowerModel)(object)this).Owner)
-        {
+        if (card.Owner.Creature != Owner || card.Type != CardType.Attack)
             return false;
-        }
-        if (card.Type != CardType.Attack)
-        {
+
+        var pileType = card.Pile?.Type;
+        if (pileType != PileType.Hand && pileType != PileType.Play) 
             return false;
-        }
-        PileType? pileType = card.Pile?.Type;
-        if (pileType == PileType.Hand || pileType == PileType.Play)
-        {
-            modifiedCost = Math.Max(0m, originalCost - 1);
-            return true;
-        }
-        return false;
+        
+        modifiedCost = Math.Max(0m, originalCost - 1);
+        return true;
     }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner.Creature == ((PowerModel)(object)this).Owner && cardPlay.Card.Type == CardType.Attack)
+        if (cardPlay.Card.Owner.Creature == Owner && cardPlay.Card.Type == CardType.Attack)
         {
-            PileType? pileType = cardPlay.Card.Pile?.Type;
+            var pileType = cardPlay.Card.Pile?.Type;
             if (pileType == PileType.Hand || pileType == PileType.Play)
-            {
-                await PowerCmd.Remove((PowerModel?)(object)this);
-            }
+                await PowerCmd.Remove(this);
         }
     }
 }

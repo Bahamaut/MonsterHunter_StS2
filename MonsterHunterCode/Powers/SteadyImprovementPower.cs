@@ -2,11 +2,9 @@
 
 namespace MonsterHunter.MonsterHunterCode.Powers;
 
-public class SteadyImprovementPower() : MonsterHunterPower
+public class SteadyImprovementPower : MonsterHunterPower
 {
-    public override PowerType Type =>
-        PowerType.Buff;
+    public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType =>
-        PowerStackType.Counter;
+    public override PowerStackType StackType => PowerStackType.Counter;
 }

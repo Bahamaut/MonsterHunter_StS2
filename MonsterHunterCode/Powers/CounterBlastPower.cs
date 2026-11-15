@@ -6,38 +6,29 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using MonsterHunter.MonsterHunterCode.Commands;
-using MonsterHunter.MonsterHunterCode.Powers;
 
 namespace MonsterHunter.MonsterHunterCode.Powers;
 
-public class CounterBlastPower() : MonsterHunterPower
+public class CounterBlastPower : MonsterHunterPower
 {
-    public override PowerType Type =>
-        PowerType.Buff;
+    public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType =>
-        PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Single;
 
-    public override async Task AfterDamageReceived(
-        PlayerChoiceContext choiceContext,
-        Creature target,
-        DamageResult result,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target,
+        DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (target != this.Owner || result.BlockedDamage <= 0 || !props.IsPoweredAttack() || dealer == null)
+        if (target != Owner || result.BlockedDamage <= 0 || !props.IsPoweredAttack() || dealer == null)
             return;
-        await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),dealer,result.BlockedDamage,this.Owner,null);
+        await MonsterHunterBlastCmd.HandleBlast(new ThrowingPlayerChoiceContext(),
+            dealer,result.BlockedDamage,Owner,cardSource);
     }
 
-    public override async Task AfterSideTurnStart(
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
-        if (!participants.Contains<Creature>(this.Owner))
+        if (!participants.Contains(Owner))
             return;
-        await PowerCmd.Decrement((PowerModel) this);
+        await PowerCmd.Decrement(this);
     }
 }
